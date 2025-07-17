@@ -13,10 +13,22 @@ class appBar extends StatelessWidget {
             color: Colors.white,
           ),
           Text("Rendify",
-              style: GoogleFonts.poppins(fontSize: 30, color: Colors.white)),
+              style: GoogleFonts.poppins(fontSize: 30, color: Colors.white), textAlign: TextAlign.center),
         ],
       ),
       centerTitle: true,
     );
   }
 }
+
+// Row(
+//         children: [
+//           const Icon(
+//             Icons.auto_graph,
+//             size: 40,
+//             color: Colors.white,
+//           ),
+//           Text("Rendify",
+//               style: GoogleFonts.poppins(fontSize: 30, color: Colors.white), textAlign: TextAlign.center),
+//         ],
+//       ),
