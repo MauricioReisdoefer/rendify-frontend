@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(), // Aqui está o nome correto
+      appBar: const CustomAppBar(), 
       body: const Center(
         child: Text('Conteúdo da página'),
       ),

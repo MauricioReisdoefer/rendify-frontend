@@ -19,7 +19,7 @@ class DuvidasFrequentesPage extends StatelessWidget {
         children: [
           const FAQTile(
             question: 'Como funciona a simulação do mercado?',
-            answer: '...'),
+            answer: 'Com base em registros passados, o simulador ira acelerar a variação da ação para fins de aprendizado'),
           const FAQTile(
             question: 'O que é a Watchlist?',
             answer: 'A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.',),
