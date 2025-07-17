@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [appBar()],
-      ),
+      )
     );
   }
 }
