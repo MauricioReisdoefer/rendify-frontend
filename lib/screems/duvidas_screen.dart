@@ -24,9 +24,6 @@ class DuvidasFrequentesPage extends StatelessWidget {
             question: 'O que é a Watchlist?',
             answer: 'A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.',),
           const FAQTile(
-            question: 'Onde posso buscar mais ajuda?',
-            answer: '...'),
-          const FAQTile(
             question: 'Como usar as ferramentas de simulação?',
             answer: 'Acesse a aba "Simulador", selecione os ativos desejados e defina as condições para iniciar a simulação.',),
           const FAQTile(
