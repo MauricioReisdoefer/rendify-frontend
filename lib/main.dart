@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/appbar.dart'; // Caminho correto para o CustomAppBar
+import 'package:rendify/screens/login_screen.dart'; // Caminho correto para o CustomAppBar
 
 void main() {
   runApp(const MaterialApp(
@@ -14,10 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(), 
-      body: const Center(
-        child: Text('Conteúdo da página'),
-      ),
+      body: LoginCadastroPage(),
     );
   }
 }

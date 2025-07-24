@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/appbar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginCadastroPage extends StatefulWidget {
   const LoginCadastroPage({super.key});
@@ -30,11 +31,11 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     'Bem-vindo ao Rendify',
-                    style: TextStyle(fontSize: 24),
+                    style: GoogleFonts.poppins(fontSize: 24),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 60),
                   Row(
                     children: [
                       Expanded(
@@ -44,8 +45,10 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                             backgroundColor: isLogin ? Colors.indigo : Colors.grey[300],
                             foregroundColor: isLogin ? Colors.white : Colors.black54,
                             elevation: isLogin ? 4 : 0,
+                            shape: LinearBorder(),
+                            minimumSize: Size(60, 60),
                           ),
-                          child: const Text('Login'),
+                          child: Text('Login', style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17),),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -56,32 +59,34 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                             backgroundColor: !isLogin ? Colors.indigo : Colors.grey[300],
                             foregroundColor: !isLogin ? Colors.white : Colors.black54,
                             elevation: !isLogin ? 4 : 0,
+                            shape: LinearBorder(),
+                            minimumSize: Size(60, 60),
                           ),
-                          child: const Text('Cadastro'),
+                          child: Text('Cadastro', style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17),),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 37),
                   TextField(
                     controller: nomeController,
-                    decoration: const InputDecoration(labelText: 'Nome'),
+                    decoration: const InputDecoration(labelText: 'Nome', border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA), labelStyle: TextStyle(color: Colors.black))
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 25),
                   TextField(
                     controller: senhaController,
                     obscureText: true,
-                    decoration: const InputDecoration(labelText: 'Senha'),
+                    decoration: const InputDecoration(labelText: 'Senha', border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA), labelStyle: TextStyle(color: Colors.black)),
                   ),
                   if (!isLogin) ...[
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 25),
                     TextField(
                       controller: confirmarSenhaController,
                       obscureText: true,
-                      decoration: const InputDecoration(labelText: 'Confirmar senha'),
+                      decoration: const InputDecoration(labelText: 'Confirmar senha', border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA), labelStyle: TextStyle(color: Colors.black))
                     ),
                   ],
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   ElevatedButton(
                     onPressed: () {
                       // ação de login ou cadastro
@@ -90,8 +95,9 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                       backgroundColor: Colors.indigo,
                       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                       elevation: 4,
+                      shape: LinearBorder(),
                     ),
-                    child: const Text('Confirmar'),
+                    child: Text('Confirmar', style: GoogleFonts.poppins(fontSize: 17, color: Colors.white),),
                   ),
                 ],
               ),

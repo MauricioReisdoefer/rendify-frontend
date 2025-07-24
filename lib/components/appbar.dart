@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -9,7 +8,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       toolbarHeight: 150,
       centerTitle: true,
-      title: Image.asset("logo.png", height: 80),
+      title: Image.asset("../assets/logo.png", height: 80),
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
