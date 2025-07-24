@@ -30,12 +30,16 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Bem-vindo ao Rendify',
-                    style: GoogleFonts.poppins(fontSize: 24),
+                  Center(
+                    child: Text(
+                      'Bem-vindo ao Rendify',
+                      style: GoogleFonts.poppins(fontSize: 24),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 30),
                   Row(
                     children: [
                       Expanded(
@@ -67,37 +71,42 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 37),
+                  const SizedBox(height: 27),
+                  Text("Nome", style: GoogleFonts.poppins(fontSize: 17,)),
                   TextField(
                     controller: nomeController,
-                    decoration: const InputDecoration(labelText: 'Nome', border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA), labelStyle: TextStyle(color: Colors.black))
+                    decoration: const InputDecoration(border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA))
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 15),
+                  Text("Senha", style: GoogleFonts.poppins(fontSize: 17,)),
                   TextField(
                     controller: senhaController,
                     obscureText: true,
-                    decoration: const InputDecoration(labelText: 'Senha', border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA), labelStyle: TextStyle(color: Colors.black)),
+                    decoration: const InputDecoration(border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA)),
                   ),
                   if (!isLogin) ...[
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 15),
+                  Text("Confirmar Senha", style: GoogleFonts.poppins(fontSize: 17,)),
                     TextField(
                       controller: confirmarSenhaController,
                       obscureText: true,
-                      decoration: const InputDecoration(labelText: 'Confirmar senha', border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA), labelStyle: TextStyle(color: Colors.black))
+                      decoration: const InputDecoration(border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA))
                     ),
                   ],
-                  const SizedBox(height: 25),
-                  ElevatedButton(
-                    onPressed: () {
-                      // ação de login ou cadastro
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.indigo,
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                      elevation: 4,
-                      shape: LinearBorder(),
+                  const SizedBox(height: 15),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // ação de login ou cadastro
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.indigo,
+                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                        elevation: 4,
+                        shape: LinearBorder(),
+                      ),
+                      child: Text('Confirmar', style: GoogleFonts.poppins(fontSize: 17, color: Colors.white),),
                     ),
-                    child: Text('Confirmar', style: GoogleFonts.poppins(fontSize: 17, color: Colors.white),),
                   ),
                 ],
               ),
