@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../components/appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rendify/screens/main_screen.dart';
 
 class LoginCadastroPage extends StatefulWidget {
   const LoginCadastroPage({super.key});
@@ -19,7 +19,6 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -98,6 +97,10 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         // ação de login ou cadastro
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainScreen()),
+                    );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigo,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../components/appbar.dart';
 
 class DuvidasFrequentesPage extends StatelessWidget {
   const DuvidasFrequentesPage({super.key});
@@ -7,13 +6,6 @@ class DuvidasFrequentesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Dúvidas frequentes"),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 1,
-      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -58,18 +50,6 @@ class DuvidasFrequentesPage extends StatelessWidget {
             ),
             child: const Text('Contatos', style: TextStyle(fontSize: 16)),
           ),],
-      ),
-
-        bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        currentIndex: 3, // Dúvidas está selecionado
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Buscar'),
-          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Simulador'),
-          BottomNavigationBarItem(icon: Icon(Icons.help_outline), label: 'Dúvidas'),
-        ],
       ),
     );
   }}
