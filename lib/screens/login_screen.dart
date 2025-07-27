@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rendify/screens/main_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginCadastroPage extends StatefulWidget {
   const LoginCadastroPage({super.key});
@@ -33,7 +34,7 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                 children: [
                   Center(
                     child: Text(
-                      'Bem-vindo ao Rendify',
+                      'Bem-vindo ao Rendify'.tr(),
                       style: GoogleFonts.poppins(fontSize: 24),
                       textAlign: TextAlign.center,
                     ),
@@ -51,7 +52,7 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                             shape: LinearBorder(),
                             minimumSize: Size(60, 60),
                           ),
-                          child: Text('Login', style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17),),
+                          child: Text('Login'.tr(), style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17),),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -65,19 +66,19 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                             shape: LinearBorder(),
                             minimumSize: Size(60, 60),
                           ),
-                          child: Text('Cadastro', style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17),),
+                          child: Text('Cadastro'.tr(), style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17),),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 27),
-                  Text("Nome", style: GoogleFonts.poppins(fontSize: 17,)),
+                  Text("Nome".tr(), style: GoogleFonts.poppins(fontSize: 17,)),
                   TextField(
                     controller: nomeController,
                     decoration: const InputDecoration(border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.zero), filled: true, fillColor: Color(0xFFCACACA))
                   ),
                   const SizedBox(height: 15),
-                  Text("Senha", style: GoogleFonts.poppins(fontSize: 17,)),
+                  Text("Senha".tr(), style: GoogleFonts.poppins(fontSize: 17,)),
                   TextField(
                     controller: senhaController,
                     obscureText: true,
@@ -85,7 +86,7 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                   ),
                   if (!isLogin) ...[
                     const SizedBox(height: 15),
-                  Text("Confirmar Senha", style: GoogleFonts.poppins(fontSize: 17,)),
+                  Text("Confirmar Senha".tr(), style: GoogleFonts.poppins(fontSize: 17,)),
                     TextField(
                       controller: confirmarSenhaController,
                       obscureText: true,
@@ -108,7 +109,7 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                         elevation: 4,
                         shape: LinearBorder(),
                       ),
-                      child: Text('Confirmar', style: GoogleFonts.poppins(fontSize: 17, color: Colors.white),),
+                      child: Text('Confirmar'.tr(), style: GoogleFonts.poppins(fontSize: 17, color: Colors.white),),
                     ),
                   ),
                 ],

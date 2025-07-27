@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rendify/components/appbar.dart';
+import 'package:rendify/screens/search.dart';
+import 'package:rendify/screens/settings.dart';
 import 'duvidas_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MainScreen extends StatefulWidget{
   @override
@@ -9,7 +12,7 @@ class MainScreen extends StatefulWidget{
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  List<Widget> widgets = [HomeScreen(), DuvidasFrequentesPage(), HomeScreen(), DuvidasFrequentesPage(),];
+  List<Widget> widgets = [HomeScreen(), SearchPage(), SettingsScreen(), DuvidasFrequentesPage(),];
   Widget body = HomeScreen();
 
 
@@ -28,11 +31,11 @@ class _MainScreenState extends State<MainScreen> {
               body = widgets[index];
             });
           },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Buscar'),
-          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Simulador'),
-          BottomNavigationBarItem(icon: Icon(Icons.help_outline), label: 'Dúvidas'),
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'.tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Buscar'.tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Simulador'.tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.help_outline), label: 'Dúvidas'.tr()),
         ],),
     );
   }
