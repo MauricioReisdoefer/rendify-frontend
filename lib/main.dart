@@ -10,7 +10,7 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en','US'), Locale('pt','BR')],
-      path: '../assets/translations',
+      path: 'assets/translations',
       fallbackLocale: Locale('pt','BR'),
       child: MyApp(),
     ),

@@ -1,6 +1,6 @@
 {
-    "name": "rendify",
-    "short_name": "rendify",
+    "name": "rendify_front",
+    "short_name": "rendify_front",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
