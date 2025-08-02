@@ -100,7 +100,7 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                         // ação de login ou cadastro
                         Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MainScreen()),
+                        MaterialPageRoute(builder: (context) => MainScreen(body: HomeScreen(),)),
                     );
                       },
                       style: ElevatedButton.styleFrom(

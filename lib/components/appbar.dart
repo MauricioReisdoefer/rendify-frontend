@@ -9,7 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: SizedBox(),
       toolbarHeight: 150,
       centerTitle: true,
-      title: Image.asset("assets/logo.png", height: 80),
+      title: Image.asset("assets/images/logo.png", height: 80),
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

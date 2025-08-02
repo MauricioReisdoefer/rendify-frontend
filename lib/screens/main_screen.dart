@@ -6,21 +6,24 @@ import 'duvidas_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class MainScreen extends StatefulWidget{
+  Widget body;
+
   @override
   State<MainScreen> createState() => _MainScreenState();
+
+  MainScreen({super.key, required this.body});
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   List<Widget> widgets = [HomeScreen(), SearchPage(), SettingsScreen(), DuvidasFrequentesPage(),];
-  Widget body = HomeScreen();
 
 
  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: body,
+      body: widget.body,
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
@@ -28,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
         onTap: (int index) {
             setState(() {
               _selectedIndex = index;
-              body = widgets[index];
+              widget.body = widgets[index];
             });
           },
         items: [
