@@ -15,7 +15,7 @@ class SettingsScreen extends StatelessWidget{
       body: ListView(
         padding: EdgeInsets.all(20.0),
         children: [
-          Text("Bem Vindo às Configurações, Cliente".tr(), style: GoogleFonts.poppins(fontSize: 20),), //Só colocar pra pegar o usuário depois
+          Text("Bem-vindo às Configurações, Cliente".tr(), style: GoogleFonts.poppins(fontSize: 20),), //Só colocar pra pegar o usuário depois
           SizedBox(height: 10,),
           RichText(
             text: TextSpan(
@@ -39,7 +39,7 @@ class SettingsScreen extends StatelessWidget{
           SizedBox(height: 20,),
           Text("Mudar Saldo".tr(), style: GoogleFonts.poppins(fontSize: 20)),
           SizedBox(height: 10,),
-          Text("Digite a quantidade desejada na área \nabaixo"),
+          Text("Digite a quantidade desejada na área \nabaixo".tr()),
           SizedBox(height: 10,),
 
           Container(
@@ -56,7 +56,7 @@ class SettingsScreen extends StatelessWidget{
             ),
             child: TextField(
               controller: saldoController,
-              decoration: const InputDecoration(border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(5))),),
+              decoration: InputDecoration(label: Text('R\$4207,01'), labelStyle: GoogleFonts.poppins(color: Colors.white), border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(5))),),
               style: GoogleFonts.poppins(color: Colors.white,),
               textAlign: TextAlign.center,
             ),

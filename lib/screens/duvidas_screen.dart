@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DuvidasFrequentesPage extends StatelessWidget {
   const DuvidasFrequentesPage({super.key});
@@ -10,28 +11,28 @@ class DuvidasFrequentesPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text("Dúvidas Frequentes", style: GoogleFonts.poppins(fontSize: 20),),
+          Text("Dúvidas Frequentes".tr(), style: GoogleFonts.poppins(fontSize: 20),),
           SizedBox(height: 5,),
-          const FAQTile(
-            question: 'Como funciona a simulação do mercado?',
-            answer: 'Com base em registros passados, o simulador ira acelerar a variação da ação para fins de aprendizado'),
-          const FAQTile(
-            question: 'O que é a Watchlist?',
-            answer: 'A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.',),
-          const FAQTile(
-            question: 'Como usar as ferramentas de simulação?',
-            answer: 'Acesse a aba "Simulador", selecione os ativos desejados e defina as condições para iniciar a simulação.',),
-          const FAQTile(
-            question: 'Como usar as ferramentas de simulação?',
-            answer: '...',
+          FAQTile(
+            question: 'Como funciona a simulação do mercado?'.tr(),
+            answer: 'Com base em registros passados, o simulador ira acelerar a variação da ação para fins de aprendizado'.tr()),
+          FAQTile(
+            question: 'O que é a Watchlist?'.tr(),
+            answer: 'A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.'.tr(),),
+          FAQTile(
+            question: 'Como usar as ferramentas de simulação?'.tr(),
+            answer: 'Acesse a aba "Simulador", selecione os ativos desejados e defina as condições para iniciar a simulação.'.tr(),),
+          FAQTile(
+            question: 'Como usar as ferramentas de simulação?'.tr(),
+            answer: '...'.tr(),
           ),
           const SizedBox(height: 30),
-          const Text.rich(
+          Text.rich(
             TextSpan(
-              text: 'Você precisa de ',
+              text: 'Você precisa de '.tr(),
               children: [
                 TextSpan(
-                  text: 'Ajuda Personalizada?',
+                  text: 'Ajuda Personalizada?'.tr(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
@@ -43,7 +44,7 @@ class DuvidasFrequentesPage extends StatelessWidget {
           const SizedBox(height: 10),
           Row(
             children: [
-              Text("Utilize nossa aba \nde contato para \nreceber ajuda"),
+              Text("Utilize nossa aba \nde contato para \nreceber ajuda".tr()),
               SizedBox(width: 6,),
               ElevatedButton(
                 onPressed: () {
@@ -57,7 +58,7 @@ class DuvidasFrequentesPage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Text('Contatos', style: GoogleFonts.poppins(fontSize: 16, color: Colors.white)),
+                  child: Text('Contatos'.tr(), style: GoogleFonts.poppins(fontSize: 16, color: Colors.white)),
                 ),
               ),
             ],
@@ -70,7 +71,7 @@ class FAQTile extends StatelessWidget {
   final String question;
   final String answer;
 
-  const FAQTile({
+  FAQTile({
     super.key,
     required this.question,
     required this.answer,
