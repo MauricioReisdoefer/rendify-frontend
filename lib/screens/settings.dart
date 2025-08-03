@@ -19,7 +19,7 @@ class SettingsScreen extends StatelessWidget{
           SizedBox(height: 10,),
           RichText(
             text: TextSpan(
-              style: GoogleFonts.poppins(),
+              style: GoogleFonts.poppins(color: Colors.black),
               children: <TextSpan>[
                 TextSpan(text: 'Para acessar saber mais, clique em'.tr()),
                 TextSpan(
@@ -121,6 +121,10 @@ class SettingsScreen extends StatelessWidget{
               if (newLocale != null) {
                 context.setLocale(newLocale);
               }
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainScreen(body: SettingsScreen(),)),
+            );
             },
             ),
           ),

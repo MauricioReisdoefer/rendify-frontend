@@ -30,5 +30,11 @@
   "Como usar as ferramentas de simulação?": "How to use the simulation tools?",
   "Acesse a aba \"Simulador\", selecione os ativos desejados e defina as condições para iniciar a simulação.": "Go to the 'Simulator' tab, select the desired assets and set the conditions to start the simulation.",
   "Você precisa de ": "Do you need ",
-  "Ajuda Personalizada?": "Custom Help?"
+  "Ajuda Personalizada?": "Custom Help?",
+  "Bem-vindo ao Simulador, Cliente": "Welcome to the Simulator, Customer",
+  "Suas ações": "Your stocks",
+  "Configurações": "Settings",
+  "Comprar ações": "Buy stocks",
+  "Total em estoque: ": "Total in stock: ",
+  "em ": "in "
 }

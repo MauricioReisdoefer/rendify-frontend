@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rendify/components/appbar.dart';
 import 'package:rendify/screens/search.dart';
-import 'package:rendify/screens/settings.dart';
+import 'package:rendify/screens/simulator.dart';
 import 'duvidas_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget{
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  List<Widget> widgets = [HomeScreen(), SearchPage(), SettingsScreen(), DuvidasFrequentesPage(),];
+  List<Widget> widgets = [HomeScreen(), SearchPage(), SimulatorScreen(), DuvidasFrequentesPage(),];
 
 
  @override
