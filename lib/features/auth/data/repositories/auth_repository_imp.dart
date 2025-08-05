@@ -11,7 +11,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserModel> register(String nome, String senha) async {
     final response = await client.post(
-      'https://localhost:5000/user/register',
+      'http://localhost:5000/user/register',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'name': nome, 'password': senha}),
     );
@@ -27,7 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserModel> login(String nome, String senha) async {
     final response = await client.post(
-      'https://localhost:5000/user/login',
+      'http://localhost:5000/user/login',
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'name': nome, 'password': senha}),
     );
