@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
-import 'package:rendify/screens/settings.dart';
+import 'package:rendify/to-do/screens/settings.dart';
 import 'main_screen.dart';
 import 'duvidas_screen.dart';
 

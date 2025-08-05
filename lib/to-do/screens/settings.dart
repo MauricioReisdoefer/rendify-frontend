@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
-import 'package:rendify/screens/duvidas_screen.dart';
-import 'package:rendify/screens/main_screen.dart';
+import 'package:rendify/to-do/screens/duvidas_screen.dart';
+import 'package:rendify/to-do/screens/main_screen.dart';
 
 class SettingsScreen extends StatelessWidget{
 
