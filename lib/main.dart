@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rendify/components/appbar.dart';
-import 'package:rendify/screens/login_screen.dart';
+import 'package:rendify/shared/components/appbar.dart';
+import 'package:rendify/features/auth/presentation/screens/login_and_cadastro_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 void main() async {

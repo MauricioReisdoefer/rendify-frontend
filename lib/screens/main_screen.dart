@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rendify/components/appbar.dart';
+import 'package:rendify/shared/components/appbar.dart';
 import 'package:rendify/screens/search.dart';
 import 'package:rendify/screens/simulator.dart';
 import 'duvidas_screen.dart';
