@@ -10,4 +10,9 @@ class LoginPasswordChanged extends LoginEvent {
   LoginPasswordChanged(this.password);
 }
 
-class LoginSubmitted extends LoginEvent {}
+class LoginSubmitted extends LoginEvent {
+  final String name;
+  final String password;
+
+  LoginSubmitted({required this.name, required this.password});
+}

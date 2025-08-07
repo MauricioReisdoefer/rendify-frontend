@@ -7,6 +7,6 @@ class LoginUser {
  LoginUser(this.repository);
 
   Future<UserModel> execute(String nome, String senha) {
-    return repository.register(nome, senha);
+    return repository.login(nome, senha);
   }
 }

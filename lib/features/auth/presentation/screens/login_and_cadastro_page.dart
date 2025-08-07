@@ -132,6 +132,13 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               if (isLogin) {
+                                final nome = nomeController.text;
+                                final senha = senhaController.text;
+                                context.read<LoginBloc>().add(
+                                        LoginSubmitted(
+                                            name: nome,
+                                            password: senha,),
+                                      );
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:rendify/features/auth/presentation/bloc/login/login_bloc.dart';
+import 'package:rendify/features/auth/presentation/bloc/login/login_event.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController nomeController;
@@ -25,6 +28,9 @@ class LoginPage extends StatelessWidget {
             filled: true,
             fillColor: Color(0xFFCACACA),
           ),
+          onChanged: (value) {
+            context.read<LoginBloc>().add(LoginNameChanged(value));
+          },
         ),
         const SizedBox(height: 15),
         Text("Senha".tr(), style: GoogleFonts.poppins(fontSize: 17)),
@@ -36,6 +42,9 @@ class LoginPage extends StatelessWidget {
             filled: true,
             fillColor: Color(0xFFCACACA),
           ),
+          onChanged: (value) {
+            context.read<LoginBloc>().add(LoginPasswordChanged(value));
+          },
         ),
       ],
     );
