@@ -1,31 +1,31 @@
 class SearchState {
-  final String name;
+  final String symbol;
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
 
   SearchState({
-    required this.name,
+    required this.symbol,
     required this.isSubmitting,
     required this.isSuccess,
     required this.isFailure,
   });
 
   factory SearchState.initial() => SearchState(
-        name: '',
+        symbol: '',
         isSubmitting: false,
         isSuccess: false,
         isFailure: false,
       );
 
   SearchState copyWith({
-    String? name,
+    String? symbol,
     bool? isSubmitting,
     bool? isSuccess,
-    bool? isFailure,
+    bool? isFailure
   }) {
     return SearchState(
-      name: name ?? this.name,
+      symbol: symbol ?? this.symbol,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       isFailure: isFailure ?? this.isFailure,

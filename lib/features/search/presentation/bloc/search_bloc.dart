@@ -1,23 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rendify/core/models/stock_model.dart';
+import 'package:rendify/features/search/data/repository/search_repository_impl.dart';
+import 'package:rendify/features/search/domain/repository/search_repository.dart';
 import 'search_event.dart';
 import 'search_state.dart';
 import 'package:rendify/features/auth/data/repositories/auth_repository_imp.dart';
 import 'package:rendify/core/models/user_model.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  final AuthRepositoryImpl authRepository;
+  final SearchRepositoryImpl searchRepository;
 
-  SearchBloc({required this.authRepository}) : super(SearchState.initial()){
+  SearchBloc({required this.searchRepository}) : super(SearchState.initial()){
     on<SearchChanged>((event, emit) {
-      emit(state.copyWith(name: event.name));
+      emit(state.copyWith(symbol: event.symbol));
     });
 
     on<SearchSubmitted>((event, emit) async {
       emit(state.copyWith(isSubmitting: true, isFailure: false, isSuccess: false));
       try {
-        final UserModel user = await authRepository.login(
-          event.name, 
-          event.password,
+        final List<StockModel> stocks = await searchRepository.search(
+          event.symbol, 
         );
 
         emit(state.copyWith(isSubmitting: false, isSuccess: true));

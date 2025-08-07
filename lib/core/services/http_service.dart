@@ -12,4 +12,10 @@ class HttpService {
   }) async {
     return client.post(Uri.parse(url), headers: headers, body: body);
   }
+  Future<http.Response> get(
+    String url, {
+    Map<String, String>? headers,
+  }) async {
+    return client.get(Uri.parse(url), headers: headers);
+  }
 }

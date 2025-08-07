@@ -1,13 +1,12 @@
 abstract class SearchEvent {}
 
 class SearchChanged extends SearchEvent {
-  final String name;
-  SearchChanged(this.name);
+  final String symbol;
+  SearchChanged(this.symbol);
 }
 
 class SearchSubmitted extends SearchEvent {
-  final String name;
-  final String password;
+  final String symbol;
 
-  SearchSubmitted({required this.name, required this.password});
+  SearchSubmitted({required this.symbol});
 }
