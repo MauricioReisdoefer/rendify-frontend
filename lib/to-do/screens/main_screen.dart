@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rendify/shared/components/appbar.dart';
-import 'package:rendify/to-do/screens/search.dart';
+import 'package:rendify/features/search/presentation/screen/search.dart';
 import 'package:rendify/to-do/screens/simulator.dart';
 import 'duvidas_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
