@@ -7,6 +7,10 @@ import 'cadastro_page.dart';
 import 'package:rendify/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:rendify/features/auth/presentation/bloc/register/register_event.dart';
 import 'package:rendify/features/auth/presentation/bloc/register/register_state.dart';
+import 'package:rendify/features/auth/domain/usercases/login_user.dart';
+import 'package:rendify/features/auth/presentation/bloc/login/login_bloc.dart';
+import 'package:rendify/features/auth/presentation/bloc/login/login_event.dart';
+import 'package:rendify/features/auth/presentation/bloc/login/login_state.dart';
 import 'package:rendify/features/auth/data/repositories/auth_repository_imp.dart';
 import 'package:rendify/features/auth/domain/usercases/register_user.dart';
 import 'package:rendify/core/services/http_service.dart';
@@ -30,15 +34,23 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
   @override
   Widget build(BuildContext context) {
     final client = http.Client();
-    return BlocProvider(
-      create: (_) => RegisterBloc(
-        RegisterUser(
-          AuthRepositoryImpl(
-            HttpService(
-              client
-              )
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RegisterBloc>(
+          create: (_) => RegisterBloc(
+            RegisterUser(
+              AuthRepositoryImpl(
+                HttpService(client),
+              ),
             ),
-    )),
+          ),
+        ),
+        BlocProvider<LoginBloc>(
+          create: (_) => LoginBloc(
+            authRepository: AuthRepositoryImpl(HttpService(client))
+          )
+        )
+      ],
       child: Scaffold(
         body: Center(
           child: Padding(
@@ -136,11 +148,16 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                     senha.isNotEmpty &&
                                     senha == confirmar) {
                                   context.read<RegisterBloc>().add(
-                                        SubmitRegister(nome: nome, senha: senha, confirmarSenha: confirmar),
+                                        SubmitRegister(
+                                            nome: nome,
+                                            senha: senha,
+                                            confirmarSenha: confirmar),
                                       );
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Preencha os campos corretamente.")),
+                                    const SnackBar(
+                                        content:
+                                            Text("Preencha os campos corretamente.")),
                                   );
                                 }
                               }

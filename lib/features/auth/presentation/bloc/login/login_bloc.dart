@@ -7,7 +7,7 @@ import 'package:rendify/core/models/user_model.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepositoryImpl authRepository;
 
-  LoginBloc({required this.authRepository}) : super(LoginState.initial()) {
+  LoginBloc({required this.authRepository}) : super(LoginState.initial()){
     on<LoginNameChanged>((event, emit) {
       emit(state.copyWith(name: event.name));
     });
