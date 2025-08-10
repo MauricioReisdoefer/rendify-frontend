@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
+import 'package:rendify/to-do/screens/purchase.dart';
 import 'package:rendify/to-do/screens/settings.dart';
 import 'main_screen.dart';
 import 'duvidas_screen.dart';
@@ -135,7 +136,12 @@ class SimulatorScreen extends StatelessWidget{
                 ],
               ),
             ),
-            child: ElevatedButton(onPressed: (){}, 
+            child: ElevatedButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainScreen(body: StockPage(),)),
+              );
+            }, 
               child: Text("Comprar ações".tr(), style: GoogleFonts.poppins(color: Colors.white, fontSize: 15)),
               style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
