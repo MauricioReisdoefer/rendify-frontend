@@ -23,8 +23,8 @@ class DuvidasFrequentesPage extends StatelessWidget {
             question: 'Como usar as ferramentas de simulação?'.tr(),
             answer: 'Acesse a aba "Simulador", selecione os ativos desejados e defina as condições para iniciar a simulação.'.tr(),),
           FAQTile(
-            question: 'Como usar as ferramentas de simulação?'.tr(),
-            answer: '...'.tr(),
+            question: 'Onde posso buscar mais ajuda?'.tr(),
+            answer: 'Para buscar ajuda sobre algo específico, vá até o final da página até nossa aba de Contatos. Para saber mais clique no botão “Saiba Mais” na página de Contatos'.tr(),
           ),
           const SizedBox(height: 30),
           Text.rich(

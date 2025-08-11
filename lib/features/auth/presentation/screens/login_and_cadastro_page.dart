@@ -134,18 +134,27 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                               if (isLogin) {
                                 final nome = nomeController.text;
                                 final senha = senhaController.text;
-                                context.read<LoginBloc>().add(
-                                        LoginSubmitted(
-                                            name: nome,
-                                            password: senha,),
-                                      );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        MainScreen(body: HomeScreen()),
-                                  ),
-                                );
+                                if (nome.isNotEmpty &&
+                                    senha.isNotEmpty){
+                                  context.read<LoginBloc>().add(
+                                          LoginSubmitted(
+                                              name: nome,
+                                              password: senha,),
+                                        );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          MainScreen(body: HomeScreen()),
+                                    ),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text("Preencha os campos corretamente".tr())),
+                                  );
+                                }
                               } else {
                                 final nome = nomeController.text;
                                 final senha = senhaController.text;
@@ -160,11 +169,18 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                             senha: senha,
                                             confirmarSenha: confirmar),
                                       );
+                                  Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        MainScreen(body: HomeScreen()),
+                                  ),
+                                );
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
+                                    SnackBar(
                                         content:
-                                            Text("Preencha os campos corretamente.")),
+                                            Text("Preencha os campos corretamente".tr())),
                                   );
                                 }
                               }

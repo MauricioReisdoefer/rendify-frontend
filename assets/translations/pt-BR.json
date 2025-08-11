@@ -29,6 +29,8 @@
   "A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.": "A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.",
   "Como usar as ferramentas de simulação?": "Como usar as ferramentas de simulação?",
   "Acesse a aba \"Simulador\", selecione os ativos desejados e defina as condições para iniciar a simulação.": "Acesse a aba \"Simulador\", selecione os ativos desejados e defina as condições para iniciar a simulação.",
+  "Onde posso buscar mais ajuda?": "Onde posso buscar mais ajuda?",
+  "Para buscar ajuda sobre algo específico, vá até o final da página até nossa aba de Contatos. Para saber mais clique no botão “Saiba Mais” na página de Contatos": "Para buscar ajuda sobre algo específico, vá até o final da página até nossa aba de Contatos. Para saber mais clique no botão “Saiba Mais” na página de Contatos",
   "Você precisa de ": "Você precisa de ",
   "Ajuda Personalizada?": "Ajuda Personalizada?",
   "Bem-vindo ao Simulador, Cliente":"Bem-vindo ao Simulador, Cliente",
@@ -36,5 +38,6 @@
   "Configurações":"Configurações",
   "Comprar ações":"Comprar ações",
   "Total em estoque: ":"Total em estoque: ",
-  "em ": "em "
+  "em ": "em ",
+  "Preencha os campos corretamente": "Preencha os campos corretamente"
 }

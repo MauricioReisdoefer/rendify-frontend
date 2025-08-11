@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rendify/shared/components/graphic.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class StockPage extends StatefulWidget {
   const StockPage({super.key});
@@ -64,13 +65,13 @@ class _StockPageState extends State<StockPage> {
                       const SizedBox(height: 12),
                   
                       Text(
-                        "Interações",
+                        "Interações".tr(),
                         style: GoogleFonts.poppins(
                             fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                       RichText(
                         text: TextSpan(
-                          text: "Interaja com suas Ações da ",
+                          text: "Interaja com suas Ações da ".tr(),
                           style: GoogleFonts.poppins(
                               fontSize: 14, color: Colors.grey),
                           children: [
@@ -119,11 +120,11 @@ class _StockPageState extends State<StockPage> {
                       const SizedBox(height: 16),
                   
                       Text(
-                        "Preço: R\$${preco.toStringAsFixed(2)}",
+                        "Preço: R\$${preco.toStringAsFixed(2)}".tr(),
                         style: GoogleFonts.poppins(fontSize: 16),
                       ),
                       Text(
-                        "Estoque: $estoque Ações",
+                        "Estoque: $estoque Ações".tr(),
                         style: GoogleFonts.poppins(
                             fontSize: 16, color: Colors.blue),
                       ),
@@ -142,7 +143,7 @@ class _StockPageState extends State<StockPage> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 14),
                               ),
-                              child: Text("Comprar",
+                              child: Text("Comprar".tr(),
                                   style: GoogleFonts.poppins(
                                       color: Colors.white, fontSize: 16)),
                             ),
@@ -159,7 +160,7 @@ class _StockPageState extends State<StockPage> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 14),
                               ),
-                              child: Text("Vender",
+                              child: Text("Vender".tr(),
                                   style: GoogleFonts.poppins(
                                       color: Colors.white, fontSize: 16)),
                             ),
@@ -171,7 +172,7 @@ class _StockPageState extends State<StockPage> {
                         controller: _controller,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: "Digite a quantidade a ser vendida/comprada...",
+                          hintText: "Digite a quantidade a ser vendida/comprada...".tr(),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8)),
                         ),
