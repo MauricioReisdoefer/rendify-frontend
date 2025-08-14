@@ -10,19 +10,19 @@ Por isso, o objetivo principal do Rendify é oferecer um ambiente seguro e intui
 
 ## 🚀 Principais Funcionalidades
 
-* **BottomBar**
+* **BottomBar:**
   O aplicativo oferece uma barra horizontal para navegação entre as telas do app.
 
-* **Simulador**
+* **Simulador:**
   Simulação de compra/venda de ações e exibição de resultados.
 
-* **Valor das Ações**
+* **Valor das Ações:**
   Estando no simulador, é possível visualizar gráficos do histórico dos valores das ações disponíveis com `fl_chart`.
 
 * **Configurações**
   Alteração de preferências, idiomas e formatações.
 
-* **Dúvidas Frequentes**
+* **Dúvidas Frequentes:**
   Lista de perguntas e respostas comuns para possíveis dúvidas do usuário.
 
 
@@ -54,7 +54,7 @@ Alguns indicadores como SMA (Média Móvel Simples) e RSI (Índice de Força Rel
 ## 📦 Como Testar
 
 1. **Instale o Flutter**
-   Siga o guia oficial: [Flutter Install](https://flutter.dev/docs/get-started/install)
+   seguindo o guia oficial: [Flutter Install](https://flutter.dev/docs/get-started/install)
 
 2. **Clone o repositório**
 
