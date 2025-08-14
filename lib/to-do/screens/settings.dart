@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
 import 'package:rendify/to-do/screens/duvidas_screen.dart';
 import 'package:rendify/to-do/screens/main_screen.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 
 class SettingsScreen extends StatelessWidget{
 
@@ -55,10 +56,14 @@ class SettingsScreen extends StatelessWidget{
               ),
             ),
             child: TextField(
+              inputFormatters: [CurrencyTextInputFormatter.currency(symbol: 'R\$')],
               controller: saldoController,
-              decoration: InputDecoration(label: Text('R\$4207,01'), labelStyle: GoogleFonts.poppins(color: Colors.white), border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(5))),),
+              decoration: InputDecoration(hintText: 'R\$4207,01', hintStyle: GoogleFonts.poppins(color: Colors.white), border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(5))),),
               style: GoogleFonts.poppins(color: Colors.white,),
               textAlign: TextAlign.center,
+              onChanged: (value) {
+                print(saldoController.text);
+              },
             ),
           ),
 
