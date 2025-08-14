@@ -22,7 +22,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           event.symbol, 
         );
 
-        emit(state.copyWith(isSubmitting: false, isSuccess: true));
+        emit(state.copyWith(isSubmitting: false, isSuccess: true, value: stocks[0].price, symbol: stocks[0].symbol ));
       } catch (e) {
         emit(state.copyWith(isSubmitting: false, isFailure: true));
       }

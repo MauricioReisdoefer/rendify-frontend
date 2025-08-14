@@ -9,6 +9,7 @@ import 'package:rendify/features/search/data/repository/search_repository_impl.d
 import 'package:rendify/core/services/http_service.dart';
 import 'package:http/http.dart' as http_client;
 import 'package:rendify/core/models/stock_model.dart';
+import 'package:rendify/shared/components/stock_list.dart';
 
 final HttpService http = HttpService(http_client.Client());
 
@@ -48,17 +49,17 @@ class SearchPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    onChanged: (value) {
-                      context.read<SearchBloc>().add(SearchChanged(value));
-                    },
                   ),
                 ),
                 if (state.isSubmitting) ...[
                   const Center(child: CircularProgressIndicator()),
                 ] else if (state.isFailure) ...[
                   Center(child: Text("Erro".tr())),
-                ] else if (state.isSuccess && state.symbol.isNotEmpty) ...[
-                  Center(child: Text("${state.symbol}")),
+                ] else if (state.isSuccess && state.symbol.isNotEmpty && state.has_showed == false) ...[
+                  Center(child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(title: Text(state.symbol), subtitle: Text("${state.value}"), trailing: Icon(Icons.star), tileColor: Color(0xFFEEEEEE), shape: BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),),
+                        )),
                 ] else ...[
                   Center(child: Text("Nenhuma pesquisa feita".tr())),
                 ]
