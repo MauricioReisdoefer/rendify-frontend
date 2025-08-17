@@ -144,7 +144,7 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          MainScreen(body: HomeScreen()),
+                                          MainScreen(body: HomeScreen(userId: 0,)),
                                     ),
                                   );
                                 } else {
@@ -172,7 +172,7 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        MainScreen(body: HomeScreen()),
+                                        MainScreen(body: HomeScreen(userId: 0,)),
                                   ),
                                 );
                                 } else {

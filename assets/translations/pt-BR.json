@@ -39,5 +39,6 @@
   "Comprar ações":"Comprar ações",
   "Total em estoque: ":"Total em estoque: ",
   "em ": "em ",
-  "Preencha os campos corretamente": "Preencha os campos corretamente"
+  "Preencha os campos corretamente": "Preencha os campos corretamente",
+  "Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente." : "Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente."
 }

@@ -17,7 +17,7 @@ class MainScreen extends StatefulWidget{
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  List<Widget> widgets = [HomeScreen(), SearchPage(), SimulatorScreen(), DuvidasFrequentesPage(),];
+  List<Widget> widgets = [HomeScreen(userId: 0,), SearchPage(), SimulatorScreen(), DuvidasFrequentesPage(),];
 
 
  @override
