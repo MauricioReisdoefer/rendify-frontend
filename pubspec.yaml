@@ -43,6 +43,7 @@ dependencies:
   easy_localization: ^3.0.8
   fl_chart: ^1.0.0
   currency_text_input_formatter: ^2.3.0
+  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
