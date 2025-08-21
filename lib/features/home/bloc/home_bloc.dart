@@ -22,13 +22,40 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
           final List<dynamic> result = data["Result"];
-          final items = result.map((e) => WatchItem(symbol: e['symbol'], price: e['price'])).toList();
+          final items = result
+              .map((e) => WatchItem(symbol: e['symbol'], price: e['price']))
+              .toList();
           emit(HomeWatchlistLoaded(items));
         } else {
           emit(HomeWatchlistError("Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.".tr()));
         }
       } catch (e) {
         emit(HomeWatchlistError("Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.".tr()));
+      }
+    });
+
+    on<RemoveFromWatchlist>((event, emit) async {
+      try {
+        final response = await client.delete(
+          Uri.parse('http://localhost:5000/watch/remove/${event.userId}/${event.symbol}'),
+          headers: {'Content-Type': 'application/json'},
+        );
+
+        if (response.statusCode == 200) {
+          // Se a watchlist já estava carregada, atualiza a lista removendo o item
+          if (state is HomeWatchlistLoaded) {
+            final currentState = state as HomeWatchlistLoaded;
+            final updatedList = currentState.items
+                .where((item) => item.symbol != event.symbol)
+                .toList();
+
+            emit(HomeWatchlistLoaded(updatedList));
+          }
+        } else {
+          emit(HomeWatchlistError("Erro ao remover ${event.symbol}".tr()));
+        }
+      } catch (e) {
+        emit(HomeWatchlistError("Erro de conexão ao remover ${event.symbol}".tr()));
       }
     });
   }
