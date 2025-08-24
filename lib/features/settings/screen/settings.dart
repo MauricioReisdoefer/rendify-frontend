@@ -14,6 +14,10 @@ import '../bloc/settings_event.dart';
 import '../bloc/settings_state.dart';
 
 class SettingsScreen extends StatelessWidget {
+  final String balance;
+
+  SettingsScreen(this.balance);
+
   final TextEditingController balanceController = TextEditingController();
 
   @override
@@ -90,9 +94,7 @@ class SettingsScreen extends StatelessWidget {
                     ],
                     controller: balanceController,
                     decoration: InputDecoration(
-                      hintText: state is SettingsSuccess
-                          ? 'R\$ ${state.user.balance.toStringAsFixed(2)}'
-                          : 'R\$ 0,00',
+                      hintText: balance,
                       hintStyle: GoogleFonts.poppins(color: Colors.white),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
@@ -222,7 +224,7 @@ class SettingsScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              MainScreen(body: SettingsScreen()),
+                              MainScreen(body: SettingsScreen(balance)),
                         ),
                       );
                     },
