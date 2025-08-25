@@ -15,10 +15,11 @@ import '../bloc/settings_state.dart';
 
 class SettingsScreen extends StatelessWidget {
   final String balance;
+  late final TextEditingController balanceController;
 
-  SettingsScreen(this.balance);
-
-  final TextEditingController balanceController = TextEditingController();
+  SettingsScreen(this.balance, {super.key}) {
+    balanceController = TextEditingController(text: balance);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class SettingsScreen extends StatelessWidget {
                     ],
                     controller: balanceController,
                     decoration: InputDecoration(
-                      hintText: balance,
+                      hintText: 'R\$ 0,00',
                       hintStyle: GoogleFonts.poppins(color: Colors.white),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
