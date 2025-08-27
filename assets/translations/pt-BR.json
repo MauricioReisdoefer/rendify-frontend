@@ -40,5 +40,13 @@
   "Total em estoque: ":"Total em estoque: ",
   "em ": "em ",
   "Preencha os campos corretamente": "Preencha os campos corretamente",
-  "Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente." : "Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente."
+  "Salvar": "Salvar",
+  "Erro ao carregar as ações disponíveis.\nTeste sua conexão ou verifique o nome da ação.": "Erro ao carregar as ações disponíveis.\nTeste sua conexão ou verifique o nome da ação.",
+  "Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.": "Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.",
+  "Você ainda não possui nenhuma ação em sua WatchList.": "Você ainda não possui nenhuma ação em sua WatchList.",
+  "Interações": "Interações",
+  "Interaja com suas Ações da ": "Interaja com suas Ações da ",
+  "Comprar": "Comprar",
+  "Vender": "Vender",
+  "Digite a quantidade a ser vendida/comprada...": "Digite a quantidade a ser vendida/comprada..."
 }

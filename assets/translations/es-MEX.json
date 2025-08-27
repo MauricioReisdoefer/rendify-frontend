@@ -29,6 +29,8 @@
   "A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.": "La lista de seguimiento es una lista personalizada de activos que deseas seguir con frecuencia.",
   "Como usar as ferramentas de simulação?": "¿Cómo usar las herramientas de simulación?",
   "Acesse a aba \"Simulador\", selecione os ativos desejados e defina as condições para iniciar a simulação.": "Accede a la pestaña \"Simulador\", selecciona los activos deseados y establece las condiciones para iniciar la simulación.",
+  "Onde posso buscar mais ajuda?": "¿Dónde puedo buscar más ayuda?",
+  "Para buscar ajuda sobre algo específico, vá até o final da página até nossa aba de Contatos. Para saber mais clique no botão “Saiba Mais” na página de Contatos": "Para buscar ayuda sobre algo específico, ve hasta el final de la página y entra en nuestra pestaña de Contactos. Para más información, haz clic en el botón 'Saber Más' en la página de Contactos.",
   "Você precisa de ": "¿Necesitas ",
   "Ajuda Personalizada?": "Ayuda personalizada?",
   "Bem-vindo ao Simulador, Cliente": "Bienvenido al Simulador, Cliente",
@@ -36,5 +38,15 @@
   "Configurações": "Configuraciones",
   "Comprar ações": "Comprar acciones",
   "Total em estoque: ": "Total en stock: ",
-  "em ": "en "
+  "em ": "en ",
+  "Salvar": "Guardar",
+  "Erro ao carregar as ações disponíveis.\nTeste sua conexão ou verifique o nome da ação.": "Error al cargar las acciones disponibles.\nVerifica tu conexión o el nombre de la acción.",
+  "Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.": "Error al cargar la Watchlist.\nVerifica tu conexión e inténtalo de nuevo.",
+  "Você ainda não possui nenhuma ação em sua WacthList.": "Aún no tienes ninguna acción en tu Watchlist.",
+  "Preencha os campos corretamente": "Complete los campos correctamente",
+  "Interações": "Interacciones",
+  "Interaja com suas Ações da ": "Interactúa con tus Acciones de ",
+  "Comprar": "Comprar",
+  "Vender": "Vender",
+  "Digite a quantidade a ser vendida/comprada...": "Ingresa la cantidad a vender/comprar..."
 }

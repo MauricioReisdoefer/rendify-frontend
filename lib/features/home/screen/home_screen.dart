@@ -22,17 +22,25 @@ class HomeScreen extends StatelessWidget {
             if (state is HomeWatchlistLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is HomeWatchlistLoaded) {
-              return StockList(
-                lista: state.items,
-                icon: Icons.star,
-                function: (symbol) {
-                  context.read<HomeWatchlistBloc>().add(
-                        RemoveFromWatchlist(userId: userId, symbol: symbol),
-                      );
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("$symbol foi removido da sua WatchList".tr())));
-                },
-              );
+              return state.items.length < 1
+                  ? Center(
+                      child: Text(
+                          textAlign: TextAlign.center,
+                          "Você ainda não possui nenhuma ação em sua WacthList."
+                              .tr()))
+                  : StockList(
+                      lista: state.items,
+                      icon: Icons.star,
+                      function: (symbol) {
+                        context.read<HomeWatchlistBloc>().add(
+                              RemoveFromWatchlist(
+                                  userId: userId, symbol: symbol),
+                            );
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "$symbol foi removido da sua WatchList".tr())));
+                      },
+                    );
             } else if (state is HomeWatchlistError) {
               return Center(
                   child: Text(
