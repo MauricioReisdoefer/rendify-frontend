@@ -220,16 +220,9 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                                 senha: senha,
                                                 confirmarSenha: confirmar),
                                           );
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MainScreen(
-                                              userId: 1,
-                                              body: HomeScreen(
-                                                userId: 1,
-                                              )),
-                                        ),
-                                      );
+                                      setState(() {
+                                        isLogin = true;
+                                      });
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
