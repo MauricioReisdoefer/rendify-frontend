@@ -153,9 +153,11 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => MainScreen(
+                                                userId: int.parse(state.id),
+                                                username: nome,
                                                 body: HomeScreen(
-                                              userId: 1,
-                                            )),
+                                                  userId: int.parse(state.id),
+                                                )),
                                           ),
                                         );
                                       } else {
@@ -222,9 +224,10 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => MainScreen(
+                                              userId: 1,
                                               body: HomeScreen(
-                                            userId: 1,
-                                          )),
+                                                userId: 1,
+                                              )),
                                         ),
                                       );
                                     } else {

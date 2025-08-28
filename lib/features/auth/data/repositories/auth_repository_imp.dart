@@ -39,4 +39,19 @@ class AuthRepositoryImpl implements AuthRepository {
       throw Exception('Erro ao fazer login: ${response.body}');
     }
   }
+
+  @override
+  Future<int> getByName(String nome) async {
+    final response = await client.get(
+      'http://localhost:5000/user/get_by_name/$nome',
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data["Result"]["id"] ?? 0;
+    } else {
+      throw Exception('Erro ao fazer login: ${response.body}');
+    }
+  }
 }

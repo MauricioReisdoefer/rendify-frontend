@@ -1,5 +1,5 @@
 class UserModel {
-  final String id;
+  final int id;
   final String nome;
 
   UserModel({

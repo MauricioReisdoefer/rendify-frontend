@@ -11,19 +11,24 @@ import '../bloc/simulator_state.dart';
 import 'package:http/http.dart' as http;
 
 class SimulatorScreen extends StatelessWidget {
+  final int userId;
+  final String username;
+
+  SimulatorScreen({super.key, required this.userId, required this.username});
+
   List lista = ["Moeda 1", "Moeda 2", "Moeda 3", "Moeda 4", "Moeda 5"];
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (_) =>
-            SimulatorBloc(http.Client())..add(FetchBalance("Fulano")),
+            SimulatorBloc(http.Client())..add(FetchBalance(username)),
         child: Scaffold(
           body: ListView(
             padding: EdgeInsets.all(20.0),
             children: [
               Text(
-                "Bem-vindo ao Simulador, Cliente".tr(),
+                "Bem-vindo ao Simulador, ".tr() + "$username",
                 style: GoogleFonts.poppins(fontSize: 20),
               ),
               SizedBox(height: 20),
@@ -148,7 +153,11 @@ class SimulatorScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => MainScreen(
+                                            userId: userId,
+                                            username: username,
                                             body: SettingsScreen(
+                                                username: username,
+                                                userId: userId,
                                                 "R\$${state.balance.toStringAsFixed(2)}"),
                                           )),
                                 );
@@ -169,7 +178,12 @@ class SimulatorScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => MainScreen(
-                                            body: SettingsScreen("R\$ 0,00"),
+                                            userId: userId,
+                                            username: username,
+                                            body: SettingsScreen(
+                                                username: username,
+                                                userId: userId,
+                                                "R\$ 0,00"),
                                           )),
                                 );
                               },

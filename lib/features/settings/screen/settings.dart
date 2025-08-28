@@ -16,8 +16,11 @@ import '../bloc/settings_state.dart';
 class SettingsScreen extends StatelessWidget {
   final String balance;
   late final TextEditingController balanceController;
+  final int userId;
+  final String username;
 
-  SettingsScreen(this.balance, {super.key}) {
+  SettingsScreen(this.balance,
+      {required this.userId, required this.username, super.key}) {
     balanceController = TextEditingController(text: balance);
   }
 
@@ -45,7 +48,7 @@ class SettingsScreen extends StatelessWidget {
               padding: EdgeInsets.all(20.0),
               children: [
                 Text(
-                  "Bem-vindo às Configurações, Cliente".tr(),
+                  "Bem-vindo às Configurações, ".tr() + "$username",
                   style: GoogleFonts.poppins(fontSize: 20),
                 ),
                 SizedBox(height: 10),
@@ -63,6 +66,8 @@ class SettingsScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => MainScreen(
+                                        userId: userId,
+                                        username: username,
                                         body: DuvidasFrequentesPage(),
                                       )),
                             );
@@ -124,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
                       if (balanceController.text.isNotEmpty) {
                         final bloc = context.read<SettingsBloc>();
                         bloc.add(ChangeBalanceEvent(
-                            userId: 1,
+                            userId: userId,
                             newBalance: double.parse(balanceController.text
                                 .replaceAll("R\$", "")
                                 .replaceAll(".", "")
@@ -224,8 +229,14 @@ class SettingsScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              MainScreen(body: SettingsScreen(balance)),
+                          builder: (context) => MainScreen(
+                              userId: userId,
+                              username: username,
+                              body: SettingsScreen(
+                                userId: userId,
+                                balance,
+                                username: username,
+                              )),
                         ),
                       );
                     },

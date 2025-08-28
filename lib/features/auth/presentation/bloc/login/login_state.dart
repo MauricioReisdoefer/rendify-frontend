@@ -4,6 +4,7 @@ class LoginState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
+  final String id;
 
   LoginState({
     required this.name,
@@ -11,6 +12,7 @@ class LoginState {
     required this.isSubmitting,
     required this.isSuccess,
     required this.isFailure,
+    required this.id
   });
 
   factory LoginState.initial() => LoginState(
@@ -19,6 +21,7 @@ class LoginState {
         isSubmitting: false,
         isSuccess: false,
         isFailure: false,
+        id: '',
       );
 
   LoginState copyWith({
@@ -27,6 +30,7 @@ class LoginState {
     bool? isSubmitting,
     bool? isSuccess,
     bool? isFailure,
+    String? id,
   }) {
     return LoginState(
       name: name ?? this.name,
@@ -34,6 +38,7 @@ class LoginState {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       isSuccess: isSuccess ?? this.isSuccess,
       isFailure: isFailure ?? this.isFailure,
+      id: id ?? this.id
     );
   }
 }

@@ -6,22 +6,35 @@ import 'duvidas_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:rendify/features/home/screen/home_screen.dart';
 
-class MainScreen extends StatefulWidget{
+class MainScreen extends StatefulWidget {
   Widget body;
+  final int? userId;
+  final String? username;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 
-  MainScreen({super.key, required this.body});
+  MainScreen({super.key, required this.body, this.userId, this.username});
 }
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  List<Widget> widgets = [HomeScreen(userId: 1,), SearchPage(), SimulatorScreen(), DuvidasFrequentesPage(),];
 
-
- @override
+  @override
   Widget build(BuildContext context) {
+    List<Widget> widgets = [
+      HomeScreen(
+        userId: widget.userId!,
+      ),
+      SearchPage(
+        userId: widget.userId!,
+      ),
+      SimulatorScreen(
+        username: widget.username!,
+        userId: widget.userId!,
+      ),
+      DuvidasFrequentesPage(),
+    ];
     return Scaffold(
       appBar: CustomAppBar(),
       body: widget.body,
@@ -30,17 +43,21 @@ class _MainScreenState extends State<MainScreen> {
         unselectedItemColor: Colors.grey,
         currentIndex: _selectedIndex,
         onTap: (int index) {
-            setState(() {
-              _selectedIndex = index;
-              widget.body = widgets[index];
-            });
-          },
+          setState(() {
+            _selectedIndex = index;
+            widget.body = widgets[index];
+          });
+        },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'.tr()),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Buscar'.tr()),
-          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Simulador'.tr()),
-          BottomNavigationBarItem(icon: Icon(Icons.help_outline), label: 'Dúvidas'.tr()),
-        ],),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search), label: 'Buscar'.tr()),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.attach_money), label: 'Simulador'.tr()),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.help_outline), label: 'Dúvidas'.tr()),
+        ],
+      ),
     );
   }
 }
