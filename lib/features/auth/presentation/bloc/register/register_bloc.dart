@@ -1,13 +1,12 @@
+import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rendify/features/auth/data/repositories/auth_repository_imp.dart';
+import 'package:http/http.dart' as http;
 import 'register_event.dart';
 import 'register_state.dart';
 import 'package:rendify/core/models/user_model.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final AuthRepositoryImpl authRepository;
-
-  RegisterBloc({required this.authRepository}) : super(RegisterState.initial()) {
+  RegisterBloc() : super(RegisterState.initial()) {
     on<RegisterNameChanged>((event, emit) {
       emit(state.copyWith(name: event.name));
     });
@@ -23,6 +22,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<RegisterSubmitted>((event, emit) async {
       emit(state.copyWith(isSubmitting: true, isFailure: false, isSuccess: false));
 
+      // Valida se senhas coincidem
       if (event.password != event.confirmPassword) {
         emit(state.copyWith(
           isSubmitting: false,
@@ -32,17 +32,31 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }
 
       try {
-        
-        //
-        // Implement API Connection
-        //
+        final response = await http.post(
+          Uri.parse('http://localhost:5000/user/register'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'name': event.name,
+            'password': event.password,
+          }),
+        );
 
-        emit(state.copyWith(
-          isSubmitting: false,
-          isSuccess: true,
-          user: user,
-        ));
-      } catch (e) {
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          final user = UserModel.fromJson(data['Result']);
+
+          emit(state.copyWith(
+            isSubmitting: false,
+            isSuccess: true,
+            user: user,
+          ));
+        } else {
+          emit(state.copyWith(
+            isSubmitting: false,
+            isFailure: true,
+          ));
+        }
+      } catch (_) {
         emit(state.copyWith(
           isSubmitting: false,
           isFailure: true,
