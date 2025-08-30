@@ -3,15 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:rendify/features/auth/presentation/bloc/login/login_state.dart';
+import 'package:rendify/features/auth/presentation/bloc/register/register_event.dart';
 import 'login_page.dart';
 import 'cadastro_page.dart';
 import 'package:rendify/features/auth/presentation/bloc/register/register_bloc.dart';
-import 'package:rendify/features/auth/presentation/bloc/register/register_event.dart';
 import 'package:rendify/features/auth/presentation/bloc/register/register_state.dart';
 import 'package:rendify/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:rendify/features/auth/presentation/bloc/login/login_event.dart';
-import 'package:rendify/features/auth/data/repositories/auth_repository_imp.dart';
-import 'package:rendify/features/auth/domain/usercases/register_user.dart';
 import 'package:rendify/core/services/http_service.dart';
 import 'package:rendify/to-do/screens/main_screen.dart';
 import 'package:http/http.dart' as http;
@@ -29,26 +27,20 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
 
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
-  final TextEditingController confirmarSenhaController =
-      TextEditingController();
+  final TextEditingController confirmarSenhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final client = http.Client();
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<RegisterBloc>(
-          create: (_) => RegisterBloc(
-            RegisterUser(
-              AuthRepositoryImpl(
-                HttpService(client),
-              ),
-            ),
-          ),
+          create: (_) => RegisterBloc(),
         ),
         BlocProvider<LoginBloc>(
-            create: (_) => LoginBloc(
-                authRepository: AuthRepositoryImpl(HttpService(client))))
+          create: (_) => LoginBloc(),
+        ),
       ],
       child: Scaffold(
         body: Center(
@@ -128,12 +120,33 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                       ),
                     const SizedBox(height: 15),
                     isLogin
-                        ? BlocBuilder<LoginBloc, LoginState>(
-                            builder: (context, state) {
-                              if (state is LoginSubmitted) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
+                        ? BlocConsumer<LoginBloc, LoginState>(
+                            listener: (context, state) {
+                              if (state.isSuccess) {
+                                // Navega para MainScreen após login
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MainScreen(
+                                      userId: int.parse(state.id),
+                                      username: nomeController.text,
+                                      body: HomeScreen(
+                                        userId: int.parse(state.id),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else if (state.isFailure) {
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          "Verifique seu nome e senha e tente novamente."
+                                              .tr())),
+                                );
                               }
+                            },
+                            builder: (context, state) {
                               return Center(
                                 child: ElevatedButton(
                                   onPressed: () {
@@ -146,31 +159,6 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                               password: senha,
                                             ),
                                           );
-                                      if (state.name == "Done") {
-                                        ScaffoldMessenger.of(context)
-                                            .clearSnackBars();
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MainScreen(
-                                                userId: int.parse(state.id),
-                                                username: nome,
-                                                body: HomeScreen(
-                                                  userId: int.parse(state.id),
-                                                )),
-                                          ),
-                                        );
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .clearSnackBars();
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                              content: Text(
-                                                  "Verifique seu nome e senha e tente novamente."
-                                                      .tr())),
-                                        );
-                                      }
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
@@ -188,21 +176,21 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                     elevation: 4,
                                     shape: LinearBorder(),
                                   ),
-                                  child: Text(
-                                    'Confirmar'.tr(),
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 17, color: Colors.white),
-                                  ),
+                                  child: state.isSubmitting
+                                      ? const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        )
+                                      : Text(
+                                          'Confirmar'.tr(),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 17, color: Colors.white),
+                                        ),
                                 ),
                               );
                             },
                           )
                         : BlocBuilder<RegisterBloc, RegisterState>(
                             builder: (context, state) {
-                              if (state is RegisterLoading) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
                               return Center(
                                 child: ElevatedButton(
                                   onPressed: () {
@@ -211,28 +199,24 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                     final confirmar =
                                         confirmarSenhaController.text;
 
-                                    if (nome.isNotEmpty &&
-                                        senha.isNotEmpty &&
-                                        senha == confirmar) {
-                                      context.read<RegisterBloc>().add(
-                                            SubmitRegister(
-                                                nome: nome,
-                                                senha: senha,
-                                                confirmarSenha: confirmar),
-                                          );
-                                      setState(() {
-                                        isLogin = true;
-                                      });
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                            content: Text(
-                                                "Preencha os campos corretamente"
-                                                    .tr())),
-                                      );
-                                    }
-                                  },
+                                if (nome.isNotEmpty && senha.isNotEmpty && senha == confirmar) {
+                                  context.read<RegisterBloc>().add(
+                                    RegisterSubmitted(
+                                      name: nome,
+                                      password: senha,
+                                      confirmPassword: confirmar,
+                                    ),
+                                  );
+                                  setState(() {
+                                    isLogin = true;
+                                  });
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Preencha os campos corretamente".tr()),
+                                    ),
+                                  );
+                                }},
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.indigo,
                                     padding: const EdgeInsets.symmetric(
