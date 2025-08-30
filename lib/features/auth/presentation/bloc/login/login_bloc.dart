@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'login_event.dart';
 import 'login_state.dart';
-import 'package:rendify/core/models/user_model.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState.initial()) {
@@ -27,10 +27,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         if (loginResponse.statusCode == 200) {
           final data = jsonDecode(loginResponse.body);
-          final user = UserModel.fromJson(data['Result']);
-          emit(state.copyWith(isSubmitting: false, isSuccess: true, id: user.id.toString()));
+          final token = data['access_token'];
+
+          // Salva o token no SharedPreferences
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('access_token', token);
+
+          emit(state.copyWith(
+            isSubmitting: false,
+            isSuccess: true,
+            id: token,
+          ));
         } else {
-          throw UnimplementedError("Erro Inesperado");
+          emit(state.copyWith(
+            isSubmitting: false,
+            isFailure: true,
+          ));
         }
       } catch (_) {
         emit(state.copyWith(isSubmitting: false, isFailure: true));
