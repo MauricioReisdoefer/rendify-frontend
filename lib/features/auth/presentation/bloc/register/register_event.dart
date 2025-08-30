@@ -1,21 +1,28 @@
-import 'package:equatable/equatable.dart';
+abstract class RegisterEvent {}
 
-abstract class RegisterEvent extends Equatable {
-  @override
-  List<Object> get props => [];
+class RegisterNameChanged extends RegisterEvent {
+  final String name;
+  RegisterNameChanged(this.name);
 }
 
-class SubmitRegister extends RegisterEvent {
-  final String nome;
-  final String senha;
-  final String confirmarSenha;
+class RegisterPasswordChanged extends RegisterEvent {
+  final String password;
+  RegisterPasswordChanged(this.password);
+}
 
-  SubmitRegister({
-    required this.nome,
-    required this.senha,
-    required this.confirmarSenha,
+class RegisterConfirmPasswordChanged extends RegisterEvent {
+  final String confirmPassword;
+  RegisterConfirmPasswordChanged(this.confirmPassword);
+}
+
+class RegisterSubmitted extends RegisterEvent {
+  final String name;
+  final String password;
+  final String confirmPassword;
+
+  RegisterSubmitted({
+    required this.name,
+    required this.password,
+    required this.confirmPassword,
   });
-
-  @override
-  List<Object> get props => [nome, senha, confirmarSenha];
 }

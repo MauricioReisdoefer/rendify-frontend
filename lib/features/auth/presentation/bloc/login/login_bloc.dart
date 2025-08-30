@@ -1,12 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'login_event.dart';
 import 'login_state.dart';
-import 'package:rendify/features/auth/data/repositories/auth_repository_imp.dart';
 import 'package:rendify/core/models/user_model.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepositoryImpl authRepository;
-
   LoginBloc({required this.authRepository}) : super(LoginState.initial()){
     on<LoginNameChanged>((event, emit) {
       emit(state.copyWith(name: event.name));
