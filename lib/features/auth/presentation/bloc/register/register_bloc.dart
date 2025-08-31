@@ -33,7 +33,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
       try {
         final response = await http.post(
-          Uri.parse('http://localhost:5000/user/register'),
+          Uri.parse('http://192.168.1.12:5000/user/register'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             'name': event.name,

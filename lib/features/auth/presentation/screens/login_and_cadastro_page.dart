@@ -10,7 +10,6 @@ import 'package:rendify/features/auth/presentation/bloc/register/register_bloc.d
 import 'package:rendify/features/auth/presentation/bloc/register/register_state.dart';
 import 'package:rendify/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:rendify/features/auth/presentation/bloc/login/login_event.dart';
-import 'package:rendify/core/services/http_service.dart';
 import 'package:rendify/to-do/screens/main_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:rendify/features/home/screen/home_screen.dart';

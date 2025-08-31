@@ -20,7 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       try {
         final loginResponse = await http.post(
-          Uri.parse('http://localhost:5000/user/login'),
+          Uri.parse('http://192.168.1.12:5000/user/login'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'name': event.name, 'password': event.password}),
         );
@@ -33,10 +33,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('access_token', token);
 
+          final newloginResponse = await http.post(
+            Uri.parse('http://192.168.1.12:5000/user/viewme'),
+            headers: {'Content-Type': 'application/json', 'Authorization' : "Bearer ${token}"},
+        );
+        
+          final newdata = jsonDecode(newloginResponse.body);
+          final id = newdata['id'];
+
           emit(state.copyWith(
             isSubmitting: false,
             isSuccess: true,
-            id: token,
+            token: token,
+            id: id.toString()
           ));
         } else {
           emit(state.copyWith(
