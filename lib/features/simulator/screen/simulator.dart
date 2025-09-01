@@ -114,7 +114,16 @@ class SimulatorScreen extends StatelessWidget {
                               child: ListTile(
                                 title: Text(state.stocks[index].symbol),
                                 subtitle: Text("${state.stocks[index].price} | ${state.stocks[index].ammount}"),
-                                trailing: Icon(Icons.search),
+                                trailing: IconButton(icon: Icon(Icons.search), onPressed: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainScreen(
+                                              body: StockPage(stock: state.stocks[index]),
+                                              username: "",
+                                            )),
+                                  );
+                                },),
                                 shape: BeveledRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
@@ -227,14 +236,7 @@ class SimulatorScreen extends StatelessWidget {
                     ),
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainScreen(
-                                      body: StockPage(),
-                                      username: "",
-                                    )),
-                          );
+                        
                         },
                         child: Text("Comprar ações".tr(),
                             style: GoogleFonts.poppins(

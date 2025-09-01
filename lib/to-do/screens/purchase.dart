@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rendify/core/models/stock_model.dart';
 import 'package:rendify/shared/components/graphic.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class StockPage extends StatefulWidget {
-  const StockPage({super.key});
+  StockModel stock;
+  StockPage({super.key, required this.stock});
 
   @override
-  State<StockPage> createState() => _StockPageState();
+  State<StockPage> createState() => _StockPageState(stock: stock);
 }
 
 class _StockPageState extends State<StockPage> {
+  StockModel stock;
+  _StockPageState({required this.stock});
   final TextEditingController _controller = TextEditingController();
   double preco = 1905.00;
   int estoque = 100;
@@ -54,12 +58,12 @@ class _StockPageState extends State<StockPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Amazon.com Inc. BDR",
+                        "Stock",
                         style: GoogleFonts.poppins(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
-                      Text("AMZO34",
+                      Text("${stock.symbol}",
                           style: GoogleFonts.poppins(
                               fontSize: 14, color: Colors.grey)),
                       const SizedBox(height: 12),
@@ -106,7 +110,7 @@ class _StockPageState extends State<StockPage> {
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.bold)),
                             const SizedBox(height: 4),
-                            Text("R\$17,81  •  2,1% ↑ R\$3,11",
+                            Text("\$${stock.price}",
                                 style: GoogleFonts.poppins(color: Colors.green)),
                             const SizedBox(height: 16),
                             SizedBox(
