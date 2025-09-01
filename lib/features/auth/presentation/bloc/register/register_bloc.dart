@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'register_event.dart';
 import 'register_state.dart';
 import 'package:rendify/core/models/user_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(RegisterState.initial()) {
@@ -33,7 +34,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
       try {
         final response = await http.post(
-          Uri.parse('http://192.168.1.12:5000/user/register'),
+          Uri.parse('${dotenv.get('API_URL')}/user/register'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
             'name': event.name,

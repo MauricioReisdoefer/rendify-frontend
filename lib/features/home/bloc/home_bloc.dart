@@ -6,6 +6,7 @@ import 'home_state.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
   final http.Client client;
@@ -15,7 +16,7 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
       emit(HomeWatchlistLoading());
       try {
         final response = await client.get(
-          Uri.parse('http://localhost:5000/watch/view/${event.userId}'),
+          Uri.parse('${dotenv.get('API_URL')}/watch/view/${event.userId}'),
           headers: {'Content-Type': 'application/json'},
         );
 
@@ -37,7 +38,7 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
     on<RemoveFromWatchlist>((event, emit) async {
       try {
         final response = await client.delete(
-          Uri.parse('http://localhost:5000/watch/remove/${event.userId}/${event.symbol}'),
+          Uri.parse('${dotenv.get('API_URL')}/watch/remove/${event.userId}/${event.symbol}'),
           headers: {'Content-Type': 'application/json'},
         );
 

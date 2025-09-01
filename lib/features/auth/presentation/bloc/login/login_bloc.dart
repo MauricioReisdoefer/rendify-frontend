@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_event.dart';
 import 'login_state.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState.initial()) {
@@ -19,8 +20,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(isSubmitting: true, isFailure: false, isSuccess: false));
 
       try {
+        
         final loginResponse = await http.post(
-          Uri.parse('http://192.168.1.12:5000/user/login'),
+          Uri.parse('${dotenv.get('API_URL')}/user/login'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'name': event.name, 'password': event.password}),
         );
@@ -34,7 +36,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           await prefs.setString('access_token', token);
 
           final newloginResponse = await http.post(
-            Uri.parse('http://192.168.1.12:5000/user/viewme'),
+            Uri.parse('${dotenv.get('API_URL')}/user/viewme'),
             headers: {'Content-Type': 'application/json', 'Authorization' : "Bearer ${token}"},
         );
         

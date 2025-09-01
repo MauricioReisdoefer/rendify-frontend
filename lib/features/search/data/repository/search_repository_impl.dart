@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:rendify/core/services/http_service.dart';
 import 'package:rendify/core/models/stock_model.dart';
 import 'package:rendify/features/search/domain/repository/search_repository.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SearchRepositoryImpl implements SearchRepository {
   final HttpService client;
@@ -10,7 +11,7 @@ class SearchRepositoryImpl implements SearchRepository {
 
   Future<List<StockModel>> search(String symbol) async {
     final response = await client.get(
-      'http://localhost:5000/stock/search/$symbol',
+      '${dotenv.get('API_URL')}/stock/search/$symbol',
       headers: {'Content-Type': 'application/json'},
     );
 

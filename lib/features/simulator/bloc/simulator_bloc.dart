@@ -3,6 +3,7 @@ import 'simulator_event.dart';
 import 'simulator_state.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SimulatorBloc extends Bloc<SimulatorEvent, SimulatorState> {
   final http.Client client;
@@ -12,7 +13,7 @@ class SimulatorBloc extends Bloc<SimulatorEvent, SimulatorState> {
       emit(SimulatorLoading());
       try {
         final response = await client.get(
-          Uri.parse("http://localhost:5000/user/get_by_name/${event.username}"),
+          Uri.parse("${dotenv.get('API_URL')}/user/get_by_name/${event.username}"),
           headers: {"Content-Type": "application/json"},
         );
 

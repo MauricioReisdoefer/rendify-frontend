@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'settings_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SettingsRepository {
   final http.Client client;
-  final String baseUrl = "http://localhost:5000/user";
+  final String baseUrl = "${dotenv.get('API_URL')}/user";
 
   SettingsRepository(this.client);
 
