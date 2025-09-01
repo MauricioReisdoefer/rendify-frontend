@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
   final http.Client client;
@@ -14,10 +15,14 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
   HomeWatchlistBloc(this.client) : super(HomeWatchlistLoading()) {
     on<FetchHomeWatchlist>((event, emit) async {
       emit(HomeWatchlistLoading());
+
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.get('access_token');
+
       try {
         final response = await client.get(
-          Uri.parse('${dotenv.get('API_URL')}/watch/view/${event.userId}'),
-          headers: {'Content-Type': 'application/json'},
+          Uri.parse('${dotenv.get('API_URL')}/watchlist/view/${event.userId}'),
+          headers: {'Content-Type': 'application/json', "Authorization":"Bearer ${token}"},
         );
 
         if (response.statusCode == 200) {
@@ -37,9 +42,11 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
 
     on<RemoveFromWatchlist>((event, emit) async {
       try {
+        final prefs = await SharedPreferences.getInstance();
+        final token = prefs.get('access_token');
         final response = await client.delete(
-          Uri.parse('${dotenv.get('API_URL')}/watch/remove/${event.userId}/${event.symbol}'),
-          headers: {'Content-Type': 'application/json'},
+          Uri.parse('${dotenv.get('API_URL')}/watchlist/remove/${event.userId}/${event.symbol}'),
+          headers: {'Content-Type': 'application/json', "Authorization":"Bearer ${token}"},
         );
 
         if (response.statusCode == 200) {

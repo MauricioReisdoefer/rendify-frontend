@@ -35,7 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('access_token', token);
 
-          final newloginResponse = await http.post(
+          final newloginResponse = await http.get(
             Uri.parse('${dotenv.get('API_URL')}/user/viewme'),
             headers: {'Content-Type': 'application/json', 'Authorization' : "Bearer ${token}"},
         );
