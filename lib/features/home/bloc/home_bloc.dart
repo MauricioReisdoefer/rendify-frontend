@@ -21,7 +21,7 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
 
       try {
         final response = await client.get(
-          Uri.parse('${dotenv.get('API_URL')}/watchlist/view/${event.userId}'),
+          Uri.parse('${dotenv.get('API_URL')}/watchlist'),
           headers: {'Content-Type': 'application/json', "Authorization":"Bearer ${token}"},
         );
 

@@ -25,6 +25,7 @@ class SearchRepositoryImpl implements SearchRepository {
         stockModels.add(StockModel(
           symbol: item['symbol'],
           price: (item['price'] as num).toDouble(),
+          ammount: int.parse(item['ammount' as num])
         ));
       }
 

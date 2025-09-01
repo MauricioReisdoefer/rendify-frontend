@@ -16,8 +16,6 @@ class SimulatorScreen extends StatelessWidget {
 
   SimulatorScreen({super.key, required this.userId, required this.username});
 
-  List lista = ["Moeda 1", "Moeda 2", "Moeda 3", "Moeda 4", "Moeda 5"];
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -74,7 +72,12 @@ class SimulatorScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Container(
+              BlocBuilder<SimulatorBloc, SimulatorState>(
+                builder: (context, state) {
+                  if (state is SimulatorLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is SimulatorLoaded) {
+                    return Container(
                   decoration: BoxDecoration(
                       color: Color(0xFFE5E5E5),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
@@ -110,8 +113,8 @@ class SimulatorScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ListTile(
-                                title: Text(lista[index]),
-                                subtitle: Text("MDA"),
+                                title: Text(state.stocks[index].symbol),
+                                subtitle: Text("${state.stocks[index].price} | ${state.stocks[index].ammount}"),
                                 trailing: Icon(Icons.search),
                                 shape: BeveledRectangleBorder(
                                     borderRadius:
@@ -119,11 +122,25 @@ class SimulatorScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: lista.length,
+                          itemCount: state.stocks.length,
                         ),
                       ),
                     ],
-                  )),
+          )
+          );
+          }
+          else if (state is SimulatorError) {
+                    return Text(
+                      "Erro ao carregar suas ações"
+                          .tr(),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(fontSize: 16),
+                    );
+                  }
+                  return SizedBox.shrink();
+          }
+          
+          ),
               SizedBox(
                 height: 20,
               ),

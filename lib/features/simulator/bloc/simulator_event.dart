@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:rendify/core/models/stock_model.dart';
 
 abstract class SimulatorEvent extends Equatable {
   @override
@@ -12,4 +13,13 @@ class FetchBalance extends SimulatorEvent {
 
   @override
   List<Object?> get props => [username];
+}
+
+class FetchStock extends SimulatorEvent {
+  final List<StockModel> stocks;
+
+  FetchStock(this.stocks);
+
+  @override
+  List<Object?> get props => [stocks];
 }
