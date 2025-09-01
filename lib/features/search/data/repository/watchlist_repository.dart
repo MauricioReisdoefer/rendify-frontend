@@ -6,11 +6,11 @@ class WatchlistRepository {
   final http.Client client;
   WatchlistRepository(this.client);
 
-  Future<void> addToWatchlist(int userId, String symbol) async {
+  Future<void> addToWatchlist(String symbol) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.get('access_token');
     final res = await client.post(
-      Uri.parse('${dotenv.get('API_URL')}/watchlist/add/$userId/$symbol'),
+      Uri.parse('${dotenv.get('API_URL')}/watchlist/add/$symbol'),
       headers: {'Content-Type': 'application/json', "Authorization":"Bearer ${token}"}, 
     );
     if (res.statusCode != 200 && res.statusCode != 201) {

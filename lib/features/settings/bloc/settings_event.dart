@@ -6,11 +6,10 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class ChangeBalanceEvent extends SettingsEvent {
-  final int userId;
   final double newBalance;
 
-  ChangeBalanceEvent({required this.userId, required this.newBalance});
+  ChangeBalanceEvent({required this.newBalance});
 
   @override
-  List<Object?> get props => [userId, newBalance];
+  List<Object?> get props => [newBalance];
 }

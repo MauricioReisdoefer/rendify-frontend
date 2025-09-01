@@ -1,12 +1,10 @@
 abstract class HomeWatchlistEvent {}
 
 class FetchHomeWatchlist extends HomeWatchlistEvent {
-  final int userId;
-  FetchHomeWatchlist(this.userId);
+  FetchHomeWatchlist();
 }
 
 class RemoveFromWatchlist extends HomeWatchlistEvent {
-  final int userId;
   final String symbol;
-  RemoveFromWatchlist({required this.userId, required this.symbol});
+  RemoveFromWatchlist({required this.symbol});
 }

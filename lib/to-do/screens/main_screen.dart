@@ -8,13 +8,12 @@ import 'package:rendify/features/home/screen/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   Widget body;
-  final int? userId;
   final String? username;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 
-  MainScreen({super.key, required this.body, this.userId, this.username});
+  MainScreen({super.key, required this.body, this.username});
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -23,15 +22,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [
-      HomeScreen(
-        userId: widget.userId!,
-      ),
-      SearchPage(
-        userId: widget.userId!,
-      ),
+      HomeScreen(),
+      SearchPage(),
       SimulatorScreen(
         username: widget.username!,
-        userId: widget.userId!,
       ),
       DuvidasFrequentesPage(),
     ];

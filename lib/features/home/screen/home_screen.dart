@@ -8,14 +8,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatelessWidget {
-  final int userId;
-  const HomeScreen({super.key, required this.userId});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          HomeWatchlistBloc(http.Client())..add(FetchHomeWatchlist(userId)),
+          HomeWatchlistBloc(http.Client())..add(FetchHomeWatchlist()),
       child: Scaffold(
         body: BlocBuilder<HomeWatchlistBloc, HomeWatchlistState>(
           builder: (context, state) {
@@ -34,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                       function: (symbol) {
                         context.read<HomeWatchlistBloc>().add(
                               RemoveFromWatchlist(
-                                  userId: userId, symbol: symbol),
+                                symbol: symbol),
                             );
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(

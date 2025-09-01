@@ -38,7 +38,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     on<AddToWatchlistEvent>((event, emit) async {
       try {
-        await watchlistRepository.addToWatchlist(event.userId, event.symbol);
+        await watchlistRepository.addToWatchlist(event.symbol);
         emit(WatchlistSuccess(
           message: "Ação adicionada à Watchlist",
           isFailure: false,

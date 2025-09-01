@@ -9,13 +9,12 @@ class SettingsRepository {
 
   SettingsRepository(this.client);
 
-  Future<SettingsUser> changeBalance(int userId, double newBalance) async {
+  Future<SettingsUser> changeBalance(double newBalance) async {
     try {
       final response = await http.post(
         Uri.parse("$baseUrl/change_balance/"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
-          "id": userId,
           "new_balance": newBalance,
         }),
       );

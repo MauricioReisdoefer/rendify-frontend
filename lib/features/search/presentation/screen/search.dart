@@ -16,9 +16,8 @@ final HttpService http = HttpService(http_client.Client());
 
 class SearchPage extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
-  final int userId;
 
-  SearchPage({super.key, required this.userId});
+  SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,7 @@ class SearchPage extends StatelessWidget {
                       function: (symbol) {
                         context
                             .read<SearchBloc>()
-                            .add(AddToWatchlistEvent(userId, state.symbol));
+                            .add(AddToWatchlistEvent(state.symbol));
                       },
                     ),
                   ),

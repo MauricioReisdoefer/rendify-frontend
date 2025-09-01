@@ -11,10 +11,9 @@ import '../bloc/simulator_state.dart';
 import 'package:http/http.dart' as http;
 
 class SimulatorScreen extends StatelessWidget {
-  final int userId;
   final String username;
 
-  SimulatorScreen({super.key, required this.userId, required this.username});
+  SimulatorScreen({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -170,11 +169,9 @@ class SimulatorScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => MainScreen(
-                                            userId: userId,
                                             username: username,
                                             body: SettingsScreen(
                                                 username: username,
-                                                userId: userId,
                                                 "R\$${state.balance.toStringAsFixed(2)}"),
                                           )),
                                 );
@@ -195,11 +192,9 @@ class SimulatorScreen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => MainScreen(
-                                            userId: userId,
                                             username: username,
                                             body: SettingsScreen(
                                                 username: username,
-                                                userId: userId,
                                                 "R\$ 0,00"),
                                           )),
                                 );
@@ -237,6 +232,7 @@ class SimulatorScreen extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => MainScreen(
                                       body: StockPage(),
+                                      username: "",
                                     )),
                           );
                         },

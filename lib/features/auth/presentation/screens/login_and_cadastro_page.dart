@@ -26,7 +26,8 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
 
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
-  final TextEditingController confirmarSenhaController = TextEditingController();
+  final TextEditingController confirmarSenhaController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -127,11 +128,8 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => MainScreen(
-                                      userId: int.parse(state.id),
                                       username: nomeController.text,
-                                      body: HomeScreen(
-                                        userId: int.parse(state.id),
-                                      ),
+                                      body: HomeScreen(),
                                     ),
                                   ),
                                 );
@@ -182,7 +180,8 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                       : Text(
                                           'Confirmar'.tr(),
                                           style: GoogleFonts.poppins(
-                                              fontSize: 17, color: Colors.white),
+                                              fontSize: 17,
+                                              color: Colors.white),
                                         ),
                                 ),
                               );
@@ -198,24 +197,30 @@ class _LoginCadastroPageState extends State<LoginCadastroPage> {
                                     final confirmar =
                                         confirmarSenhaController.text;
 
-                                if (nome.isNotEmpty && senha.isNotEmpty && senha == confirmar) {
-                                  context.read<RegisterBloc>().add(
-                                    RegisterSubmitted(
-                                      name: nome,
-                                      password: senha,
-                                      confirmPassword: confirmar,
-                                    ),
-                                  );
-                                  setState(() {
-                                    isLogin = true;
-                                  });
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Preencha os campos corretamente".tr()),
-                                    ),
-                                  );
-                                }},
+                                    if (nome.isNotEmpty &&
+                                        senha.isNotEmpty &&
+                                        senha == confirmar) {
+                                      context.read<RegisterBloc>().add(
+                                            RegisterSubmitted(
+                                              name: nome,
+                                              password: senha,
+                                              confirmPassword: confirmar,
+                                            ),
+                                          );
+                                      setState(() {
+                                        isLogin = true;
+                                      });
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                              "Preencha os campos corretamente"
+                                                  .tr()),
+                                        ),
+                                      );
+                                    }
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.indigo,
                                     padding: const EdgeInsets.symmetric(

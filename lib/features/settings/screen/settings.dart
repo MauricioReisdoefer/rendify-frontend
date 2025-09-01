@@ -16,11 +16,10 @@ import '../bloc/settings_state.dart';
 class SettingsScreen extends StatelessWidget {
   final String balance;
   late final TextEditingController balanceController;
-  final int userId;
   final String username;
 
   SettingsScreen(this.balance,
-      {required this.userId, required this.username, super.key}) {
+      {required this.username, super.key}) {
     balanceController = TextEditingController(text: balance);
   }
 
@@ -66,7 +65,6 @@ class SettingsScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => MainScreen(
-                                        userId: userId,
                                         username: username,
                                         body: DuvidasFrequentesPage(),
                                       )),
@@ -129,7 +127,6 @@ class SettingsScreen extends StatelessWidget {
                       if (balanceController.text.isNotEmpty) {
                         final bloc = context.read<SettingsBloc>();
                         bloc.add(ChangeBalanceEvent(
-                            userId: userId,
                             newBalance: double.parse(balanceController.text
                                 .replaceAll("R\$", "")
                                 .replaceAll(".", "")
@@ -230,10 +227,8 @@ class SettingsScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => MainScreen(
-                              userId: userId,
                               username: username,
                               body: SettingsScreen(
-                                userId: userId,
                                 balance,
                                 username: username,
                               )),

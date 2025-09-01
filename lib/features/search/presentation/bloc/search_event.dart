@@ -12,7 +12,6 @@ class SearchSubmitted extends SearchEvent {
 }
 
 class AddToWatchlistEvent extends SearchEvent {
-  final int userId;
   final String symbol;
-  AddToWatchlistEvent(this.userId, this.symbol);
+  AddToWatchlistEvent(this.symbol);
 }

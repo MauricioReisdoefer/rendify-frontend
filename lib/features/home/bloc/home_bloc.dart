@@ -45,7 +45,7 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
         final prefs = await SharedPreferences.getInstance();
         final token = prefs.get('access_token');
         final response = await client.delete(
-          Uri.parse('${dotenv.get('API_URL')}/watchlist/remove/${event.userId}/${event.symbol}'),
+          Uri.parse('${dotenv.get('API_URL')}/watchlist/remove/${event.symbol}'),
           headers: {'Content-Type': 'application/json', "Authorization":"Bearer ${token}"},
         );
 
