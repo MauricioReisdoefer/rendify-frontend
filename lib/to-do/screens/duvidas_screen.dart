@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DuvidasFrequentesPage extends StatelessWidget {
   const DuvidasFrequentesPage({super.key});
@@ -11,20 +12,35 @@ class DuvidasFrequentesPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text("Dúvidas Frequentes".tr(), style: GoogleFonts.poppins(fontSize: 20),),
-          SizedBox(height: 5,),
+          Text(
+            "Dúvidas Frequentes".tr(),
+            style: GoogleFonts.poppins(fontSize: 20),
+          ),
+          SizedBox(
+            height: 5,
+          ),
           FAQTile(
-            question: 'Como funciona a simulação do mercado?'.tr(),
-            answer: 'Com base em registros passados, o simulador ira acelerar a variação da ação para fins de aprendizado'.tr()),
+              question: 'Como funciona a simulação do mercado?'.tr(),
+              answer:
+                  'Com base em registros passados, o simulador ira acelerar a variação da ação para fins de aprendizado'
+                      .tr()),
           FAQTile(
             question: 'O que é a Watchlist?'.tr(),
-            answer: 'A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.'.tr(),),
+            answer:
+                'A Watchlist é uma lista personalizada de ativos que você deseja acompanhar frequentemente.'
+                    .tr(),
+          ),
           FAQTile(
             question: 'Como usar as ferramentas de simulação?'.tr(),
-            answer: 'Acesse a aba "Simulador", selecione os ativos desejados e defina as condições para iniciar a simulação.'.tr(),),
+            answer:
+                'Acesse a aba "Simulador", selecione os ativos desejados e defina as condições para iniciar a simulação.'
+                    .tr(),
+          ),
           FAQTile(
             question: 'Onde posso buscar mais ajuda?'.tr(),
-            answer: 'Para buscar ajuda sobre algo específico, vá até o final da página até nossa aba de Contatos. Para saber mais clique no botão “Saiba Mais” na página de Contatos'.tr(),
+            answer:
+                'Para buscar ajuda sobre algo específico, vá até o final da página para encontrar o nosso e-mail.'
+                    .tr(),
           ),
           const SizedBox(height: 30),
           Text.rich(
@@ -37,35 +53,49 @@ class DuvidasFrequentesPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
                   ),
-                )],),
-
+                )
+              ],
+            ),
             style: TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 10),
           Row(
             children: [
-              Text("Utilize nossa aba \nde contato para \nreceber ajuda".tr()),
-              SizedBox(width: 6,),
+              Text("Utilize nosso contato\npor e-mail para \nreceber ajuda"
+                  .tr()),
+              SizedBox(
+                width: 6,
+              ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  final Uri _url = Uri.parse(
+                      'https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSDbgzdKjfGcLmfTxBDGBhXCwqTCPRmHXzckxGGvdgXvgcjTsrCVthbLXckpWrbMZNgtcbzm');
+                  if (!await launchUrl(_url)) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Não foi possível acessar o e-mail")));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF5F6EF8),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Text('Contatos'.tr(), style: GoogleFonts.poppins(fontSize: 16, color: Colors.white)),
+                  child: Text('E-mail'.tr(),
+                      style: GoogleFonts.poppins(
+                          fontSize: 16, color: Colors.white)),
                 ),
               ),
             ],
-          ),],
+          ),
+        ],
       ),
     );
-  }}
+  }
+}
 
 class FAQTile extends StatelessWidget {
   final String question;
@@ -94,6 +124,9 @@ class FAQTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
             child: Text(answer),
-          ),],),
+          ),
+        ],
+      ),
     );
-  }}
+  }
+}
