@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:rendify/core/models/stock_model.dart';
+import 'package:rendify/core/services/http_service.dart';
 import 'package:rendify/features/buy/bloc/buy_bloc.dart';
 import 'package:rendify/shared/components/graphic.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,7 +24,6 @@ class _StockPageState extends State<StockPage> {
   StockModel stock;
   _StockPageState({required this.stock});
   final TextEditingController _controller = TextEditingController();
-  double preco = 1905.00;
   List<FlSpot> pontos = [
     const FlSpot(0, 20),
     const FlSpot(1, 30),
@@ -41,14 +42,14 @@ class _StockPageState extends State<StockPage> {
     const FlSpot(14, 150),
     const FlSpot(15, 120),
     const FlSpot(17, 160),
-    const FlSpot(18, 180),
+    const FlSpot(18, 500),
   ];
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => 
-        StockBloc(initialPrice: this.stock.price, initialQuantity: this.stock.ammount!),
+        StockBloc(initialPrice: this.stock.price, initialQuantity: this.stock.ammount!, client: HttpService(Client()), symbol: stock.symbol),
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -130,13 +131,16 @@ class _StockPageState extends State<StockPage> {
                         const SizedBox(height: 16),
                     
                         Text(
-                          "Preço: R\$${preco.toStringAsFixed(2)}".tr(),
+                          "Preço: R\$${stock.price.toStringAsFixed(2)}".tr(),
                           style: GoogleFonts.poppins(fontSize: 16),
                         ),
-                        Text(
-                          "Estoque: ${stock.ammount} Ações".tr(),
+                        BlocBuilder<StockBloc, StockState>(
+                          builder: (context, state) => 
+                          Text(
+                          "Estoque: ${state.quantity} Ações".tr(),
                           style: GoogleFonts.poppins(
                               fontSize: 16, color: Colors.blue),
+                        )
                         ),
                     
                         const SizedBox(height: 20),
@@ -149,7 +153,7 @@ class _StockPageState extends State<StockPage> {
                                     onPressed: (){
                                       context.
                                       read<StockBloc>()
-                                      ..add(BuyStock(5));
+                                      ..add(BuyStock(int.parse(_controller.value.text) ?? 0));
                                     },
                                     style: ElevatedButton.styleFrom(
                                       minimumSize: Size(1, 70),
@@ -174,7 +178,7 @@ class _StockPageState extends State<StockPage> {
                                     onPressed: (){
                                       context.
                                       read<StockBloc>()
-                                      ..add(SellStock(5));
+                                      ..add(SellStock(int.parse(_controller.value.text) ?? 0));
                                     },
                                     style: ElevatedButton.styleFrom(
                                       minimumSize: Size(1, 70),
