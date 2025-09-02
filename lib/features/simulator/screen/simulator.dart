@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:rendify/features/buy/search_purchase.dart';
 import 'package:rendify/features/settings/screen/settings.dart';
 import 'package:rendify/features/buy/purchase.dart';
 import 'package:rendify/to-do/screens/main_screen.dart';
@@ -72,83 +73,84 @@ class SimulatorScreen extends StatelessWidget {
                 height: 10,
               ),
               BlocBuilder<SimulatorBloc, SimulatorState>(
-                builder: (context, state) {
-                  if (state is SimulatorLoading) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (state is SimulatorLoaded) {
-                    return Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xFFE5E5E5),
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
-                  height: 300,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      RichText(
-                          text: TextSpan(
-                              style: GoogleFonts.poppins(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                              children: <TextSpan>[
-                            TextSpan(text: 'Total em estoque: '.tr()),
-                            TextSpan(
-                              text: 'R\$8301,10 ',
-                              style: GoogleFonts.poppins(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold),
+                  builder: (context, state) {
+                if (state is SimulatorLoading) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (state is SimulatorLoaded) {
+                  return Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xFFE5E5E5),
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      height: 300,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10),
+                          RichText(
+                              text: TextSpan(
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                  children: <TextSpan>[
+                                TextSpan(text: 'Total em estoque: '.tr()),
+                                TextSpan(
+                                  text: 'R\$8301,10 ',
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(text: 'em '.tr()),
+                                TextSpan(
+                                  text: '389 ações '.tr(),
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ])),
+                          SizedBox(height: 10),
+                          Expanded(
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListTile(
+                                    title: Text(state.stocks[index].symbol),
+                                    subtitle: Text(
+                                        "${state.stocks[index].price} | ${state.stocks[index].ammount}"),
+                                    trailing: IconButton(
+                                      icon: Icon(Icons.search),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => MainScreen(
+                                                    body: StockPage(
+                                                        stock: state
+                                                            .stocks[index]),
+                                                    username: "",
+                                                  )),
+                                        );
+                                      },
+                                    ),
+                                    shape: BeveledRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10))),
+                                  ),
+                                );
+                              },
+                              itemCount: state.stocks.length,
                             ),
-                            TextSpan(text: 'em '.tr()),
-                            TextSpan(
-                              text: '389 ações '.tr(),
-                              style: GoogleFonts.poppins(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ])),
-                      SizedBox(height: 10),
-                      Expanded(
-                        child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                title: Text(state.stocks[index].symbol),
-                                subtitle: Text("${state.stocks[index].price} | ${state.stocks[index].ammount}"),
-                                trailing: IconButton(icon: Icon(Icons.search), onPressed: (){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MainScreen(
-                                              body: StockPage(stock: state.stocks[index]),
-                                              username: "",
-                                            )),
-                                  );
-                                },),
-                                shape: BeveledRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                              ),
-                            );
-                          },
-                          itemCount: state.stocks.length,
-                        ),
-                      ),
-                    ],
-          )
-          );
-          }
-          else if (state is SimulatorError) {
-                    return Text(
-                      "Erro ao carregar suas ações"
-                          .tr(),
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(fontSize: 16),
-                    );
-                  }
-                  return SizedBox.shrink();
-          }
-          
-          ),
+                          ),
+                        ],
+                      ));
+                } else if (state is SimulatorError) {
+                  return Text(
+                    "Erro ao carregar suas ações".tr(),
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(fontSize: 16),
+                  );
+                }
+                return SizedBox.shrink();
+              }),
               SizedBox(
                 height: 20,
               ),
@@ -203,8 +205,7 @@ class SimulatorScreen extends StatelessWidget {
                                       builder: (context) => MainScreen(
                                             username: username,
                                             body: SettingsScreen(
-                                                username: username,
-                                                "R\$ 0,00"),
+                                                username: username, "R\$ 0,00"),
                                           )),
                                 );
                               },
@@ -236,7 +237,14 @@ class SimulatorScreen extends StatelessWidget {
                     ),
                     child: ElevatedButton(
                         onPressed: () {
-                        
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreen(
+                                      username: "",
+                                      body: SearchToBuyPage(),
+                                    )),
+                          );
                         },
                         child: Text("Comprar ações".tr(),
                             style: GoogleFonts.poppins(

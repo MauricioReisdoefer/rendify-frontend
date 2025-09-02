@@ -41,7 +41,7 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
           emit(HomeWatchlistError("Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.".tr()));
         }
       } catch (e) {
-        emit(HomeWatchlistError(e.toString()));
+        emit(HomeWatchlistError("Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.".tr()));
       }
     });
 
