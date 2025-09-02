@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rendify/core/models/stock_model.dart';
+import 'package:rendify/features/buy/bloc/buy_bloc.dart';
 import 'package:rendify/shared/components/graphic.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'bloc/buy_bloc.dart';
+import 'bloc/buy_state.dart';
+import 'bloc/buy_event.dart';
 
 class StockPage extends StatefulWidget {
   StockModel stock;
@@ -18,8 +23,6 @@ class _StockPageState extends State<StockPage> {
   _StockPageState({required this.stock});
   final TextEditingController _controller = TextEditingController();
   double preco = 1905.00;
-  int estoque = 100;
-
   List<FlSpot> pontos = [
     const FlSpot(0, 20),
     const FlSpot(1, 30),
@@ -43,153 +46,173 @@ class _StockPageState extends State<StockPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: Container(
+    return BlocProvider(
+      create: (_) => 
+        StockBloc(initialPrice: this.stock.price, initialQuantity: this.stock.ammount!),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(color: Color(0xFFEEEEEE), borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Stock",
-                        style: GoogleFonts.poppins(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 4),
-                      Text("${stock.symbol}",
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(color: Color(0xFFEEEEEE), borderRadius: BorderRadius.all(Radius.circular(8))),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Stock",
                           style: GoogleFonts.poppins(
-                              fontSize: 14, color: Colors.grey)),
-                      const SizedBox(height: 12),
-                  
-                      Text(
-                        "Interações".tr(),
-                        style: GoogleFonts.poppins(
-                            fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: "Interaja com suas Ações da ".tr(),
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 4),
+                        Text("${stock.symbol}",
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, color: Colors.grey)),
+                        const SizedBox(height: 12),
+                    
+                        Text(
+                          "Interações".tr(),
                           style: GoogleFonts.poppins(
-                              fontSize: 14, color: Colors.grey),
-                          children: [
-                            TextSpan(
-                              text: "Amazon.com Inc. BDR",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 14, color: Colors.blue),
-                            ),
-                          ],
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                  
-                      // Card do gráfico
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 10,
-                              offset: const Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Amazon.com Inc. BDR",
+                        RichText(
+                          text: TextSpan(
+                            text: "Interaja com suas Ações da ".tr(),
+                            style: GoogleFonts.poppins(
+                                fontSize: 14, color: Colors.grey),
+                            children: [
+                              TextSpan(
+                                text: "Amazon.com Inc. BDR",
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 4),
-                            Text("\$${stock.price}",
-                                style: GoogleFonts.poppins(color: Colors.green)),
-                            const SizedBox(height: 16),
-                            SizedBox(
-                              height: 200,
-                              child: BdrChartCard(),
+                                    fontSize: 14, color: Colors.blue),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                    
+                        // Card do gráfico
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                blurRadius: 10,
+                                offset: const Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Amazon.com Inc. BDR",
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 4),
+                              Text("\$${stock.price}",
+                                  style: GoogleFonts.poppins(color: Colors.green)),
+                              const SizedBox(height: 16),
+                              SizedBox(
+                                height: 200,
+                                child: BdrChartCard(),
+                              ),
+                            ],
+                          ),
+                        ),
+                    
+                        const SizedBox(height: 16),
+                    
+                        Text(
+                          "Preço: R\$${preco.toStringAsFixed(2)}".tr(),
+                          style: GoogleFonts.poppins(fontSize: 16),
+                        ),
+                        Text(
+                          "Estoque: ${stock.ammount} Ações".tr(),
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, color: Colors.blue),
+                        ),
+                    
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: BlocBuilder<StockBloc, StockState>(
+                                builder: (context, state){ 
+                                  return ElevatedButton(
+                                    onPressed: (){
+                                      context.
+                                      read<StockBloc>()
+                                      ..add(BuyStock(5));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(1, 70),
+                                      backgroundColor: Colors.green,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(8)),
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 14),
+                                    ),
+                                    child: Text("Comprar".tr(),
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white, fontSize: 16)),
+                                  );
+                                
+                                }),
+                                ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: BlocBuilder<StockBloc, StockState>(
+                                builder: (context, state){ 
+                                  return ElevatedButton(
+                                    onPressed: (){
+                                      context.
+                                      read<StockBloc>()
+                                      ..add(SellStock(5));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(1, 70),
+                                      backgroundColor: const Color(0xffeb3f3f),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(8)),
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 14),
+                                    ),
+                                    child: Text("Vender".tr(),
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white, fontSize: 16)),
+                                  );
+                                
+                                }),
                             ),
                           ],
                         ),
-                      ),
-                  
-                      const SizedBox(height: 16),
-                  
-                      Text(
-                        "Preço: R\$${preco.toStringAsFixed(2)}".tr(),
-                        style: GoogleFonts.poppins(fontSize: 16),
-                      ),
-                      Text(
-                        "Estoque: $estoque Ações".tr(),
-                        style: GoogleFonts.poppins(
-                            fontSize: 16, color: Colors.blue),
-                      ),
-                  
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: (){},
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(1, 70),
-                                backgroundColor: Colors.green,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 14),
-                              ),
-                              child: Text("Comprar".tr(),
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white, fontSize: 16)),
-                            ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: _controller,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: "Digite a quantidade a ser vendida/comprada...".tr(),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8)),
                           ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: (){},
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(1, 70),
-                                backgroundColor: Colors.red,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 14),
-                              ),
-                              child: Text("Vender".tr(),
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white, fontSize: 16)),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        controller: _controller,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: "Digite a quantidade a ser vendida/comprada...".tr(),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8)),
                         ),
-                      ),
-                      const SizedBox(height: 80),
-                    ],
+                        const SizedBox(height: 80),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

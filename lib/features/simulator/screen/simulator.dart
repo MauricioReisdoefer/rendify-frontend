@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:rendify/features/buy/purchase.dart';
 import 'package:rendify/features/settings/screen/settings.dart';
-import '../../../to-do/screens/main_screen.dart';
+import 'package:rendify/features/buy/purchase.dart';
+import 'package:rendify/to-do/screens/main_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/simulator_bloc.dart';
 import '../bloc/simulator_event.dart';
