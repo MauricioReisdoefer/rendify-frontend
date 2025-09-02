@@ -1,12 +1,12 @@
 class StockModel {
   final String symbol;
   final double price;
-  final int ammount;
+  final int? ammount;
 
   StockModel({
     required this.symbol,
     required this.price,
-    required this.ammount
+    this.ammount
   });
 
   factory StockModel.fromJson(Map<String, dynamic> json) {
