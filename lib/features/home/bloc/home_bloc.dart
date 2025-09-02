@@ -21,13 +21,18 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
 
       try {
         final response = await client.get(
-          Uri.parse('${dotenv.get('API_URL')}/watchlist'),
+          Uri.parse('${dotenv.get('API_URL')}/watchlist/'),
           headers: {'Content-Type': 'application/json', "Authorization":"Bearer ${token}"},
         );
 
+        print(json.decode(response.body));
+
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
-          final List<dynamic> result = data["Result"];
+          final List<dynamic> result = [];
+          for (Map item in data){
+            result.add(item);
+          }
           final items = result
               .map((e) => WatchItem(symbol: e['symbol'], price: e['price']))
               .toList();
@@ -36,7 +41,7 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
           emit(HomeWatchlistError("Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.".tr()));
         }
       } catch (e) {
-        emit(HomeWatchlistError("Erro ao carregar a Watchlist.\nTeste sua conexão e tente novamente.".tr()));
+        emit(HomeWatchlistError(e.toString()));
       }
     });
 
@@ -45,7 +50,7 @@ class HomeWatchlistBloc extends Bloc<HomeWatchlistEvent, HomeWatchlistState> {
         final prefs = await SharedPreferences.getInstance();
         final token = prefs.get('access_token');
         final response = await client.delete(
-          Uri.parse('${dotenv.get('API_URL')}/watchlist/remove/${event.symbol}'),
+          Uri.parse('${dotenv.get('API_URL')}/watchlist/${event.symbol}'),
           headers: {'Content-Type': 'application/json', "Authorization":"Bearer ${token}"},
         );
 
