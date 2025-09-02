@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'settings_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsRepository {
   final http.Client client;
@@ -11,11 +12,13 @@ class SettingsRepository {
 
   Future<SettingsUser> changeBalance(double newBalance) async {
     try {
-      final response = await http.post(
-        Uri.parse("$baseUrl/change_balance/"),
-        headers: {"Content-Type": "application/json"},
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.get('access_token');
+      final response = await http.put(
+        Uri.parse("http://127.0.0.1:5000/user/updateme"),
+        headers: {"Content-Type": "application/json", "Authorization":"Bearer ${token}"},
         body: jsonEncode({
-          "new_balance": newBalance,
+          "balance": newBalance,
         }),
       );
 

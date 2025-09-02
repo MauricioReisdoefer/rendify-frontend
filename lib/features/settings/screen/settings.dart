@@ -18,8 +18,7 @@ class SettingsScreen extends StatelessWidget {
   late final TextEditingController balanceController;
   final String username;
 
-  SettingsScreen(this.balance,
-      {required this.username, super.key}) {
+  SettingsScreen(this.balance, {required this.username, super.key}) {
     balanceController = TextEditingController(text: balance);
   }
 
@@ -132,11 +131,6 @@ class SettingsScreen extends StatelessWidget {
                                 .replaceAll(".", "")
                                 .replaceAll(",", ".")
                                 .replaceAll(" ", ""))));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content:
-                                  Text("Saldo atualizado com sucesso".tr())),
-                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
