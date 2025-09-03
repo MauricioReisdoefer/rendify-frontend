@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
             balanceController.text =
                 'R\$ ${state.user.balance.toStringAsFixed(2)}';
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Balance updated successfully".tr())),
+              SnackBar(content: Text(state.message.tr())),
             );
           } else if (state is SettingsError) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -147,6 +147,12 @@ class SettingsScreen extends StatelessWidget {
                                 .replaceAll(".", "")
                                 .replaceAll(",", ".")
                                 .replaceAll(" ", ""))));
+                        if (state is SettingsSuccess){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(state.message.tr())),
+                        );
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

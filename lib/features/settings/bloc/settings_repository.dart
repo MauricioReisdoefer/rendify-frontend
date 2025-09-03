@@ -15,7 +15,7 @@ class SettingsRepository {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.get('access_token');
       final response = await http.put(
-        Uri.parse("http://127.0.0.1:5000/user/updateme"),
+        Uri.parse("$baseUrl/updateme"),
         headers: {"Content-Type": "application/json", "Authorization":"Bearer ${token}"},
         body: jsonEncode({
           "balance": newBalance,
@@ -24,9 +24,8 @@ class SettingsRepository {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        if (responseData.containsKey("Result")) {
-          final data = responseData["Result"];
-          return SettingsUser.fromJson(data);
+        if (!responseData.containsKey("msg")) {
+          return SettingsUser.fromJson(responseData);
         } else {
           throw Exception(
               "Campo de resposta não encontrado na resposta da API");
@@ -41,13 +40,16 @@ class SettingsRepository {
   }
 
   Future<SettingsUser> getUserByName(String name) async {
+    
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.get('access_token');
     final response = await http.get(
-      Uri.parse("$baseUrl/get_by_name/$name"),
-      headers: {"Content-Type": "application/json"},
+      Uri.parse("$baseUrl/viewme"),
+      headers: {"Content-Type": "application/json", "Authorization":"Bearer ${token}"},
     );
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body)["Result"];
+      final data = jsonDecode(response.body)["balance"];
       return SettingsUser.fromJson(data);
     } else {
       throw Exception("Erro ao obter saldo");

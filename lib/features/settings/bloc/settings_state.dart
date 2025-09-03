@@ -12,8 +12,9 @@ class SettingsLoading extends SettingsState {}
 
 class SettingsSuccess extends SettingsState {
   final SettingsUser user;
+  final String message;
 
-  SettingsSuccess(this.user);
+  SettingsSuccess(this.user, this.message);
 
   @override
   List<Object?> get props => [user];

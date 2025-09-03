@@ -12,9 +12,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       try {
         final user = await settingsRepository.changeBalance(
             event.newBalance);
-        emit(SettingsSuccess(user));
+        emit(SettingsSuccess(user, "Saldo atualizado com sucesso"));
       } catch (e) {
-        print("Erro ao atualizar saldo: $e");
+        emit(SettingsError("Seu saldo não pôde ser atualizado"));
       }
     });
   }
