@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:rendify/features/buy/search_purchase.dart';
+import 'package:rendify/features/profile/screen/profile.dart';
 import 'package:rendify/features/settings/screen/settings.dart';
 import 'package:rendify/features/buy/purchase.dart';
 import 'package:rendify/to-do/screens/main_screen.dart';
@@ -25,8 +26,23 @@ class SimulatorScreen extends StatelessWidget {
           body: ListView(
             padding: EdgeInsets.all(20.0),
             children: [
-              Text(
-                "Bem-vindo ao Simulador, ".tr() + "$username",
+              Text.rich(
+                TextSpan(text: "Bem-vindo ao Simulador, ".tr(), children: [
+                  TextSpan(
+                    text: "$username",
+                    style: GoogleFonts.poppins(color: Color(0xFF205FFF)),
+                    onEnter: (event) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainScreen(
+                                  username: username,
+                                  body: ProfilePage(),
+                                )),
+                      );
+                    },
+                  )
+                ]),
                 style: GoogleFonts.poppins(fontSize: 20),
               ),
               SizedBox(height: 20),

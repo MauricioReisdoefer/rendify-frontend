@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
+import 'package:rendify/features/profile/screen/profile.dart';
 import 'package:rendify/features/settings/bloc/settings_repository.dart';
 import 'package:rendify/to-do/screens/duvidas_screen.dart';
 import 'package:rendify/to-do/screens/main_screen.dart';
@@ -45,10 +46,25 @@ class SettingsScreen extends StatelessWidget {
             body: ListView(
               padding: EdgeInsets.all(20.0),
               children: [
-                Text(
-                  "Bem-vindo às Configurações, ".tr() + "$username",
-                  style: GoogleFonts.poppins(fontSize: 20),
-                ),
+                Text.rich(
+                TextSpan(text: "Bem-vindo às Configurações, ".tr(), children: [
+                  TextSpan(
+                    text: "$username",
+                    style: GoogleFonts.poppins(color: Color(0xFF205FFF)),
+                    onEnter: (event) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainScreen(
+                                  username: username,
+                                  body: ProfilePage(),
+                                )),
+                      );
+                    },
+                  )
+                ]),
+                style: GoogleFonts.poppins(fontSize: 20),
+              ),
                 SizedBox(height: 10),
                 RichText(
                   text: TextSpan(
