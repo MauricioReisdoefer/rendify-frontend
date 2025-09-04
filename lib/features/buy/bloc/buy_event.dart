@@ -24,3 +24,7 @@ class SellStock extends StockEvent {
   @override
   List<Object?> get props => [quantity];
 }
+
+class GetCompany extends StockEvent {
+  
+}
