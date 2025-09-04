@@ -90,7 +90,7 @@ class _StockListState extends State<StockList> {
                                     end: Alignment.bottomRight,
                                   ),
                                 ),
-                                child: BdrChartCard(),
+                                child: BdrChartCard(symbol: item.symbol),
                               ),
                             ),
                           ],

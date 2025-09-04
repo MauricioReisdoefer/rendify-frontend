@@ -122,7 +122,7 @@ class _StockPageState extends State<StockPage> {
                               const SizedBox(height: 16),
                               SizedBox(
                                 height: 200,
-                                child: BdrChartCard(),
+                                child: BdrChartCard(symbol: stock.symbol,),
                               ),
                             ],
                           ),
