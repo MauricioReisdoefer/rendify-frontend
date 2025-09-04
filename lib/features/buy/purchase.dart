@@ -158,8 +158,8 @@ class _StockPageState extends State<StockPage> {
                               child: BlocBuilder<StockBloc, StockState>(
                                 builder: (context, state) {
                                   return ElevatedButton(
-                                    onPressed: () {
-                                      final amount =
+                                    onPressed: () async {
+                                      final amount = await
                                           int.tryParse(_controller.text) ?? 0;
                                       context
                                           .read<StockBloc>()
@@ -173,10 +173,11 @@ class _StockPageState extends State<StockPage> {
                                       padding:
                                           const EdgeInsets.symmetric(vertical: 14),
                                     ),
-                                    child: Text("Comprar".tr(),
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.white, fontSize: 16)),
-                                  );
+                                    child: 
+                                        Text("Comprar".tr(),
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white, fontSize: 16)
+                                  ),);
                                 },
                               ),
                             ),

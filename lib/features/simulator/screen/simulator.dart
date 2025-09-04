@@ -30,17 +30,9 @@ class SimulatorScreen extends StatelessWidget {
                 TextSpan(text: "Bem-vindo ao Simulador, ".tr(), children: [
                   TextSpan(
                     text: "$username",
-                    style: GoogleFonts.poppins(color: Color(0xFF205FFF)),
-                    onEnter: (event) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainScreen(
-                                  username: username,
-                                  body: ProfilePage(),
-                                )),
-                      );
-                    },
+                    style: GoogleFonts.poppins(color: Color.fromARGB(255, 0, 0, 0)),
+                    
+                  
                   )
                 ]),
                 style: GoogleFonts.poppins(fontSize: 20),
@@ -114,10 +106,11 @@ class SimulatorScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: ListTile(
+                                  child: Container(
+                                    child: ListTile(
                                     title: Text(state.stocks[index].symbol),
                                     subtitle: Text(
-                                        "${state.stocks[index].price} | ${state.stocks[index].ammount}"),
+                                        "Valor Unitário: ${state.stocks[index].price}\n${state.stocks[index].ammount} Comprados"),
                                     trailing: IconButton(
                                       icon: Icon(Icons.search),
                                       onPressed: () {
@@ -138,7 +131,16 @@ class SimulatorScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
                                   ),
-                                );
+                                decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.5), // Glassy
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.blueAccent.withOpacity(0.3),
+                                  blurRadius: 12,
+                                  offset: Offset(0, 6),
+                                ),],)
+                                ));
                               },
                               itemCount: state.stocks.length,
                             ),

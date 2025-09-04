@@ -34,6 +34,10 @@ class StockBloc extends Bloc<StockEvent, StockState> {
         })
       );
 
+      if(response.statusCode != 200){
+        emit(StockError(msg: "Saldo insuficiente", price: state.price, quantity: state.quantity, symbol: symbol));
+      }
+
       final decoded = jsonDecode(response.body);
       emit(state.copyWith(quantity: decoded["ammount"]));
     });
@@ -60,6 +64,10 @@ class StockBloc extends Bloc<StockEvent, StockState> {
           "ammount": -sellQuantity
         }));
 
+      if(response.statusCode != 200){
+        emit(StockError(msg: "Você não possue ações o suficiente", price: state.price, quantity: state.quantity, symbol: symbol));
+      }
+      
       final decoded = jsonDecode(response.body);
       emit(state.copyWith(quantity: decoded["ammount"]));
     });

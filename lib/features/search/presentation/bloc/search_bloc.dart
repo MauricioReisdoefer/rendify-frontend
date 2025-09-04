@@ -17,7 +17,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       emit(state.copyWith(symbol: event.symbol));
     });
 
-    on<SearchSubmitted>((event, emit) async {
+    on<SearchSubmitted>((event, emit) async { 
       emit(state.copyWith(
           isSubmitting: true, isFailure: false, isSuccess: false));
       try {

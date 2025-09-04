@@ -47,21 +47,7 @@ class SettingsScreen extends StatelessWidget {
               padding: EdgeInsets.all(20.0),
               children: [
                 Text.rich(
-                TextSpan(text: "Bem-vindo às Configurações, ".tr(), children: [
-                  TextSpan(
-                    text: "$username",
-                    style: GoogleFonts.poppins(color: Color(0xFF205FFF)),
-                    onEnter: (event) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainScreen(
-                                  username: username,
-                                  body: ProfilePage(),
-                                )),
-                      );
-                    },
-                  )
+                TextSpan(text: "Bem-vindo às Configurações".tr(), children: [
                 ]),
                 style: GoogleFonts.poppins(fontSize: 20),
               ),
