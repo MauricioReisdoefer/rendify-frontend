@@ -69,7 +69,7 @@ class DuvidasFrequentesPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   final Uri _url = Uri.parse(
-                      'https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSDbgzdKjfGcLmfTxBDGBhXCwqTCPRmHXzckxGGvdgXvgcjTsrCVthbLXckpWrbMZNgtcbzm');
+                      'https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSHwCdMTSTsgMHFdXTCvzWXKxvPllttCwwhTPNFhDMKnRltCVcKsZLrNjpRQNnTSglsgbJvc');
                   if (!await launchUrl(_url)) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Não foi possível acessar o e-mail")));
                   }
