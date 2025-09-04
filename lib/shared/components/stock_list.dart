@@ -79,7 +79,7 @@ class _StockListState extends State<StockList> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: Container(
-                                height: 180,
+                                height: 200,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -90,7 +90,10 @@ class _StockListState extends State<StockList> {
                                     end: Alignment.bottomRight,
                                   ),
                                 ),
-                                child: BdrChartCard(symbol: item.symbol),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 15.0, right: 20.0),
+                                  child: BdrChartCard(symbol: item.symbol),
+                                ),
                               ),
                             ),
                           ],
