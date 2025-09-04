@@ -8,7 +8,11 @@ class StockList extends StatefulWidget {
   final Function(String symbol) function;
   final IconData icon;
 
-  StockList({required this.lista, required this.function, required this.icon});
+  StockList({
+    required this.lista,
+    required this.function,
+    required this.icon,
+  });
 
   @override
   State<StockList> createState() => _StockListState();
@@ -16,75 +20,109 @@ class StockList extends StatefulWidget {
 
 class _StockListState extends State<StockList> {
   bool isGraphic = false;
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.transparent),
-              overlayColor: MaterialStateProperty.all(Colors.transparent),
-              shadowColor: MaterialStateProperty.all(Colors.transparent),
-              elevation: MaterialStateProperty.all(0),
-              splashFactory: NoSplash.splashFactory,
-            ),
-            onPressed: () {
-              setState(() {
-                isGraphic = !isGraphic;
-              });
-            },
-            child: isGraphic
-                ? Container(
-                    height: 300,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
+    return Container(
+      child: ListView.builder(
+        itemCount: widget.lista.length,
+        itemBuilder: (context, index) {
+          final item = widget.lista[index];
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  isGraphic = !isGraphic;
+                });
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.5), // Glassy
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blueAccent.withOpacity(0.3),
+                      blurRadius: 12,
+                      offset: Offset(0, 6),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(widget.lista[index].symbol,
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 4),
-                        Text("R\$${widget.lista[index].price}",
-                            style: GoogleFonts.poppins(color: Colors.green)),
-                        const SizedBox(height: 16),
-                        SizedBox(
-                          height: 200,
-                          child: BdrChartCard(),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListTile(
-                    title: Text(widget.lista[index].symbol),
-                    subtitle: Text("${widget.lista[index].price}"),
-                    trailing: IconButton(
-                        onPressed: () =>
-                            widget.function(widget.lista[index].symbol),
-                        icon: Icon(
-                          widget.icon,
-                          color: Colors.black,
-                        )),
-                    tileColor: Color(0xFFEEEEEE),
-                    shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                  ],
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.4),
+                    width: 1,
                   ),
-          ),
-        );
-      },
-      itemCount: widget.lista.length,
+                ),
+                child: isGraphic
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.symbol,
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "R\$${item.price}",
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                color: Colors.green[700],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Container(
+                                height: 180,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.white.withOpacity(0.8),
+                                      Colors.white.withOpacity(0.3),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: BdrChartCard(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListTile(
+                        title: Text(
+                          item.symbol,
+                          style: GoogleFonts.poppins(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "R\$${item.price}",
+                          style: GoogleFonts.poppins(
+                            color: Colors.black54,
+                          ),
+                        ),
+                        trailing: IconButton(
+                          onPressed: () => widget.function(item.symbol),
+                          icon: Icon(
+                            widget.icon,
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                      ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
