@@ -31,7 +31,7 @@ class SettingsScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is SettingsSuccess) {
             balanceController.text =
-                'R\$ ${state.user.balance.toStringAsFixed(2)}';
+                'R\$ ${state.user!.balance.toStringAsFixed(2)}';
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message.tr())),
             );
@@ -189,7 +189,8 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      print("Clicou");
+                      final bloc = context.read<SettingsBloc>();
+                      bloc.add(RestartSimulatorEvent());
                     },
                     child: Text("Reiniciar".tr(),
                         style: GoogleFonts.poppins(

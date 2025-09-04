@@ -11,7 +11,7 @@ class SettingsInitial extends SettingsState {}
 class SettingsLoading extends SettingsState {}
 
 class SettingsSuccess extends SettingsState {
-  final SettingsUser user;
+  final SettingsUser? user;
   final String message;
 
   SettingsSuccess(this.user, this.message);

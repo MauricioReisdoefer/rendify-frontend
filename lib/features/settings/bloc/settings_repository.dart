@@ -3,12 +3,26 @@ import 'package:http/http.dart' as http;
 import 'settings_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter/material.dart';
 class SettingsRepository {
   final http.Client client;
   final String baseUrl = "${dotenv.get('API_URL')}/user";
 
   SettingsRepository(this.client);
+
+  Future<void> restartSimulator() async {
+    final prefs = await SharedPreferences.getInstance();
+    debugPrint("chegou aqui");
+    final token = prefs.getString('access_token') ?? '';
+    debugPrint("chegou aqui2");
+    final response = await client.delete(
+      Uri.parse("${dotenv.get('API_URL')}/simulator/restart"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    );
+    }
 
   Future<SettingsUser> changeBalance(double newBalance) async {
     try {

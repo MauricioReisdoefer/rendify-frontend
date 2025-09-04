@@ -135,6 +135,7 @@ class SimulatorScreen extends StatelessWidget {
                                     trailing: IconButton(
                                       icon: Icon(Icons.search),
                                       onPressed: () {
+                                        context.read<SimulatorBloc>().add(FetchBalance(""));
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(

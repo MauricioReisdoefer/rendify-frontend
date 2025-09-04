@@ -13,3 +13,5 @@ class ChangeBalanceEvent extends SettingsEvent {
   @override
   List<Object?> get props => [newBalance];
 }
+
+class RestartSimulatorEvent extends SettingsEvent {}
