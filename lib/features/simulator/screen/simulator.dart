@@ -107,20 +107,6 @@ class SimulatorScreen extends StatelessWidget {
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                   children: <TextSpan>[
-                                TextSpan(text: 'Total em estoque: '.tr()),
-                                TextSpan(
-                                  text: 'R\$8301,10 ',
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(text: 'em '.tr()),
-                                TextSpan(
-                                  text: '389 ações '.tr(),
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold),
-                                ),
                               ])),
                           SizedBox(height: 10),
                           Expanded(
